@@ -20,14 +20,15 @@ all : $(NAME)
 $(NAME) : $(OBJECTS)
 	$(AR) $@ $^
 
-bonus : $(OBJECTS_B)
+bonus : .FLAG
 
-$(OBJECTS_B) : $(SRCS_B)
-	$(CC) $(CFLAGS) -c $^
-	$(AR) $(NAME) $@
+.FLAG : $(OBJECTS_B)
+	$(AR) $(NAME) $^
+	@touch .FLAG
 
 clean:
-	rm -f $(OBJECTS) $(OBJECTS_B)
+	rm -f $(OBJECTS) $(OBJECTS_B) 
+	@rm -f .FLAG
 
 fclean: clean
 	rm -f $(NAME)
