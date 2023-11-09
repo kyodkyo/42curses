@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 14:09:31 by dakyo             #+#    #+#             */
-/*   Updated: 2023/11/09 14:18:54 by dakyo            ###   ########.fr       */
+/*   Updated: 2023/11/09 21:48:21 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*res;
 
 	index = 0;
-	// if (s1 == 0 && s2 == 0)
-	// 	return (0);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	res = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
