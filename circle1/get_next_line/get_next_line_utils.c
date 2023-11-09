@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 21:43:19 by dakang            #+#    #+#             */
-/*   Updated: 2023/11/03 21:18:34 by dakang           ###   ########.fr       */
+/*   Created: 2023/11/09 14:09:31 by dakyo             #+#    #+#             */
+/*   Updated: 2023/11/09 14:18:54 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,51 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	s1_len;
-	size_t	s2_len;
+	int		s1_len;
+	int		s2_len;
+	int		index;
 	char	*res;
 
-	if (s1 == 0 && s2 == 0)
-		return (0);
+	index = 0;
+	// if (s1 == 0 && s2 == 0)
+	// 	return (0);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	res = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
 	if (res == NULL)
 		return (NULL);
-	ft_memcpy(res, s1, s1_len);
-	ft_strlcpy(res + s1_len, s2, s2_len + 1);
+	while (*s1 != '\0')
+		res[index++] = *s1++;
+	while (*s2 != '\0')
+		res[index++] = *s2++;
+	res[index] = '\0';
 	return (res);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strdup(const char *s1, int size)
 {
-	char	*str;
+	int		i;
+	char	*res;
 
-	str = (char *)s;
-	while (*str != '\0')
-	{
-		if (*str == (char)c)
-			return (str);
-		str++;
+	i = 0;
+	res = (char *)malloc(sizeof(char) * (size + 1));
+	if (res == NULL)
+		return (NULL);
+	while (s1[i] && i < size)
+	{		
+		res[i] = s1[i];
+		i++;
 	}
-	if (*str == (char)c)
-		return (str);
-	return (0);
+	res[i] = '\0';
+	return (res);
+}
+
+int	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }

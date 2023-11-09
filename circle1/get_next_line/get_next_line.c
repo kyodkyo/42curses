@@ -3,97 +3,99 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 21:43:17 by dakang            #+#    #+#             */
-/*   Updated: 2023/11/03 21:18:35 by dakang           ###   ########.fr       */
+/*   Created: 2023/11/09 14:09:28 by dakyo             #+#    #+#             */
+/*   Updated: 2023/11/09 14:22:23 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-ssize_t	read_buffer(int fd, char *buffer)
+int find_position(char *s)
 {
-	ssize_t	size;
-
-	size = read(fd, buffer, BUFFER_SIZE);
-	if (size < 0)
+	int s_len;
+	int index;
+	
+	s_len = 0;
+	index = -1;
+	while (s[s_len])
+		s_len++;
+	while (++index < s_len)
 	{
-		free(buffer);
-		return (-1);
+		if (s[index] == '\n')
+			return (index);
 	}
-	buffer[size] = '\0';
-	return (size);
+	return(-1);
 }
 
-char	*find_line(char **result, char buffer)
+char *find_new_line(char **total_line, char *buffer)
 {
-	int		i;
-	int		count;
+	char	*result;
 	char	*temp;
-	char	*cut_line;
+	int		new_line_point;
 
-	i = -1;
-	count = 1;
-	temp = *result;
-	while (*result[++i] != '\n')
-		count++;
-	cut_line = (char *)malloc(sizeof(char) * (count + 1));
-	if (cut_line == NULL)
-		return (NULL);
-	cut_line[count] = '\n';
-	while (--count >= 0)
-		cut_line[count] = *result[count];
-	*result = ft_strchr(*result, '\n'); //????ㅇㅣ러ㅎ게만 해도 되나
-	if (*result == 0)
-		return (0);
-	free(temp);
+	result = NULL;
+	if (find_position(*total_line) == -1)
+	{
+		if (*total_line[0] != '\0')
+			result = ft_strdup(*total_line, ft_strlen(*total_line));
+		free(*total_line);
+		*total_line = NULL;
+	}
+	else
+	{
+		result = ft_strdup(*total_line, find_position(*total_line) + 1);
+		new_line_point = ft_strlen(*total_line + find_position(*total_line) + 1);
+		temp = ft_strdup((*total_line + find_position(*total_line) + 1), new_line_point);
+		free(*total_line);
+		*total_line = temp;
+	}
 	free(buffer);
-	return (cut_line);
+	return (result);
 }
 
-char	*file_end(char **result, char *buffer)
+char	*read_buffer(int fd, char *buffer, char **total_line)
 {
-	char	*file_data;
+	ssize_t	read_size;
+	char	*temp;
 
-	free(buffer);
-	file_data = *result;
-	*result = 0;
-	return (file_data);
+	buffer[BUFFER_SIZE] = '\0';
+	read_size = read(fd, buffer, BUFFER_SIZE);
+	while (read_size > 0)
+	{
+		buffer[read_size] = '\0';
+		temp = ft_strjoin(*total_line, buffer);
+		free(*total_line);
+		*total_line = temp;
+		if (find_position(*total_line) != -1)
+			return (find_new_line(total_line, buffer));
+		read_size = read(fd, buffer, BUFFER_SIZE);
+	}
+	return (find_new_line(total_line, buffer));
 }
 
 char	*get_next_line(int fd)
 {
-	ssize_t		buf_size;
+	static char	*total_line;
 	char		*buffer;
-	char		*temp;
-	static char	*result;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (buffer == NULL)
-		return (0);
-	temp = ft_strchr(result, '\n');
-	while (temp != 0)
-	{
-		buf_size = read_buffer(fd, buffer);
-		if (buf_size == -1)
-			return (0);
-		result = ft_strjoin(result, buffer);
-		if (result == 0)
-			return (0);
-		if (buf_size == 0)
-			return (file_end(&result, buffer));
-		temp = ft_strchr(result, '\n');
+		return (NULL);
+	if (BUFFER_SIZE <= 0 || read(fd, buffer, BUFFER_SIZE) == -1)
+	{        
+		free(buffer);
+		return (NULL);
 	}
-	return (find_line(&result, buffer));
+	if (total_line != NULL && find_position(total_line) != -1)
+		return (find_new_line(&total_line, buffer));
+	if (total_line == NULL)
+	{
+		total_line = (char *)malloc(sizeof(char) * 1);
+		if (total_line == NULL)
+			return (NULL);
+		total_line[0] = '\0';
+	}
+	return (read_buffer(fd, buffer, &total_line));    
 }
-/*
-파일이 끝나거나, 개행을 찾거나 둘 중 하나
-acc
-asddd
-size = 5?
-윗줄만 반환하고 a는 정적변수에 담아두고 이후 gnl이 다시 호출되었을 때 사용됨
-free
-*/
