@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 21:48:11 by dakyo             #+#    #+#             */
-/*   Updated: 2023/11/09 21:48:12 by dakyo            ###   ########.fr       */
+/*   Updated: 2023/11/09 22:03:15 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char *read_buffer(int fd, char *buffer, char **total_line)
     return (check_new_line(total_line, buffer));
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
     static char *total_line;
     char *buffer;
@@ -83,12 +83,12 @@ char *get_next_line(int fd)
     buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
     if (buffer == NULL)
         return (NULL);
-    if (BUFFER_SIZE <= 0 || read(fd, buffer, BUFFER_SIZE) < 0)
+    if (BUFFER_SIZE < 0 || read(fd, buffer, BUFFER_SIZE) == -1)
     {
         free(buffer);
         return (NULL);
     }
-    if (total_line != NULL && find_new_line(total_line) != -1)
+    if (total_line != NULL && find_new_line(total_line) != -1) // 쌓인 데이터 안에 개행이 있는 경우
         return (check_new_line(&total_line, buffer));
     if (total_line == NULL) // 첫번째 호출 or 이전 호출에서 읽은 데이터가 없는 경우
     {
