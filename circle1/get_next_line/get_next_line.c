@@ -6,7 +6,7 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 21:48:11 by dakang            #+#    #+#             */
-/*   Updated: 2023/11/10 22:14:50 by dakang           ###   ########.fr       */
+/*   Updated: 2023/11/10 22:45:33 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char	*check_new_line(char **total, char *buffer)
 		*total = temp;
 	}
 	free(buffer);
+	if (result == NULL)
+		return (NULL);
 	return (result);
 }
 
@@ -67,7 +69,10 @@ char	*read_buffer(int fd, char *buffer, char **total_line)
 		buffer[read_size] = '\0';
 		temp = ft_strjoin(*total_line, buffer);
 		if (temp == NULL)
+		{
+			free(temp);
 			return (NULL);
+		}
 		free(*total_line);
 		*total_line = temp;
 		if (find_new_line(*total_line) != -1)
@@ -96,6 +101,7 @@ char	*get_next_line(int fd)
 		return (check_new_line(&total_line, buffer));
 	if (total_line == NULL)
 	{
+		free(total_line);
 		total_line = (char *)malloc(sizeof(char) * 1);
 		if (total_line == NULL)
 			return (NULL);
