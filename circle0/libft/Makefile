@@ -12,6 +12,9 @@ OBJECTS_B = ${SRCS_B:.c=.o}
 NAME = libft.a
 AR = ar rc
 
+
+djshjksdvk
+
 all : $(NAME)
 
 %.o : %.c
