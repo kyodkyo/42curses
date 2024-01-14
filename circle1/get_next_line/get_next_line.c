@@ -6,30 +6,47 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 21:48:11 by dakang            #+#    #+#             */
-/*   Updated: 2023/11/10 22:45:33 by dakang           ###   ########.fr       */
+/*   Updated: 2024/01/14 17:37:19 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	find_new_line(char *total_line)
+// int	find_new_line(char *total_line)
+// {
+// 	int	line_len;
+// 	int	i;
+
+// 	line_len = 0;
+// 	i = 0;
+// 	while (total_line[line_len])
+// 		line_len++;
+// 	while (i < line_len)
+// 	{
+// 		if (total_line[i] == '\n')
+// 			return (i);
+// 		i++;
+// 	}
+// 	return (-1);
+// }
+
+int	find_new_line(char *buf)
 {
-	int	line_len;
 	int	i;
 
-	line_len = 0;
-	i = -1;
-	while (total_line[line_len])
-		line_len++;
-	while (++i < line_len)
+	i = 0;
+	if (buf == NULL)
+		return (-1);
+	while (buf[i])
 	{
-		if (total_line[i] == '\n')
+		if (buf[i] == '\n')
 			return (i);
+		i++;
 	}
 	return (-1);
 }
 
-char	*check_new_line(char **total, char *buffer)
+char	*make_result_line(char **total, char *buffer)
 {
 	char	*result;
 	char	*temp;
@@ -52,8 +69,6 @@ char	*check_new_line(char **total, char *buffer)
 		*total = temp;
 	}
 	free(buffer);
-	if (result == NULL)
-		return (NULL);
 	return (result);
 }
 
@@ -68,7 +83,7 @@ char	*read_buffer(int fd, char *buffer, char **total_line)
 	{
 		buffer[read_size] = '\0';
 		temp = ft_strjoin(*total_line, buffer);
-		if (temp == NULL)
+		if (!temp)
 		{
 			free(temp);
 			return (NULL);
@@ -76,10 +91,10 @@ char	*read_buffer(int fd, char *buffer, char **total_line)
 		free(*total_line);
 		*total_line = temp;
 		if (find_new_line(*total_line) != -1)
-			return (check_new_line(total_line, buffer));
+			return (make_result_line(total_line, buffer));
 		read_size = read(fd, buffer, BUFFER_SIZE);
 	}
-	return (check_new_line(total_line, buffer));
+	return (make_result_line(total_line, buffer));
 }
 
 char	*get_next_line(int fd)
@@ -90,22 +105,21 @@ char	*get_next_line(int fd)
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (buffer == NULL)
 		return (NULL);
-	if (BUFFER_SIZE < 0 || read(fd, buffer, 0) == -1)
+	if (BUFFER_SIZE <= 0 || read(fd, buffer, 0) == -1)
 	{
 		free(buffer);
 		free(total_line);
 		total_line = NULL;
 		return (NULL);
 	}
-	if (total_line != NULL && find_new_line(total_line) != -1)
-		return (check_new_line(&total_line, buffer));
 	if (total_line == NULL)
 	{
-		free(total_line);
 		total_line = (char *)malloc(sizeof(char) * 1);
 		if (total_line == NULL)
 			return (NULL);
 		total_line[0] = '\0';
 	}
+	if (total_line != NULL && find_new_line(total_line) != -1)
+		return (make_result_line(&total_line, buffer));
 	return (read_buffer(fd, buffer, &total_line));
 }

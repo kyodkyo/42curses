@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 21:43:11 by dakang            #+#    #+#             */
-/*   Updated: 2024/01/14 17:37:19 by dakang           ###   ########.fr       */
+/*   Created: 2024/01/14 14:35:18 by dakang            #+#    #+#             */
+/*   Updated: 2024/01/14 17:49:59 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -20,13 +20,24 @@
 #  define BUFFER_SIZE 500
 # endif
 
-int		find_new_line(char *total_line);
-char	*make_result_line(char **total_line, char *buffer);
-char	*read_buffer(int fd, char *buffer, char **total_line);
+typedef struct s_list
+{
+	int				fd;
+	int				end_of_file;
+	char			*prev;
+	struct s_list	*next;
+}		t_list;
+
+int		get_next_node(int fd, t_list **list);
+int		find_new_line(char *buf);
+void	make_after_nl(t_list *list);
+char	*read_buffer(int fd, t_list *list);
 char	*get_next_line(int fd);
 
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strdup(const char *s1, int size);
+t_list	*get_fd(int fd, t_list *list);
 int		ft_strlen(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2, int buf_size);
+char	*ft_strdup(const char *s1, int size);
+void	free_one(int fd, t_list **list);
 
 #endif
