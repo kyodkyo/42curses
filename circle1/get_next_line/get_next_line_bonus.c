@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 21:37:10 by dakang            #+#    #+#             */
-/*   Updated: 2024/01/16 12:36:08 by dakang           ###   ########.fr       */
+/*   Updated: 2024/01/16 15:42:33 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-int	read_buffer(int fd, ssize_t *read_size, char **prev)
+int	update_buffer(int fd, ssize_t *read_size, char **prev)
 {
 	char	*temp;
 	char	buffer[BUFFER_SIZE + 1];
@@ -89,7 +89,7 @@ char	*get_next_line(int fd)
 		if (prev[fd] == NULL)
 			return (NULL);
 	}
-	if (read_buffer(fd, &read_size, &prev[fd]))
+	if (update_buffer(fd, &read_size, &prev[fd]))
 		return (NULL);
 	if (make_line(&prev[fd], &line))
 		return (NULL);

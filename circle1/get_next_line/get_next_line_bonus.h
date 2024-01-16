@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 21:37:13 by dakang            #+#    #+#             */
-/*   Updated: 2024/01/15 21:50:27 by dakang           ###   ########.fr       */
+/*   Updated: 2024/01/16 15:42:33 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #  define BUFFER_SIZE 20
 # endif
 
-int		read_buffer(int fd, ssize_t *read_size, char **prev);
+int		update_buffer(int fd, ssize_t *read_size, char **prev);
 int		make_line(char **prev, char **line);
 void	free_all(char **prev, char **line);
 char	*get_next_line(int fd);
