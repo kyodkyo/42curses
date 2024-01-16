@@ -6,7 +6,7 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:27:12 by dakang            #+#    #+#             */
-/*   Updated: 2024/01/15 22:02:09 by dakang           ###   ########.fr       */
+/*   Updated: 2024/01/16 12:35:50 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	make_line(char **prev, char **line)
 	if (*line == NULL)
 	{
 		free(*prev);
-		*prev = 0;
+		*prev = NULL;
 		return (1);
 	}
 	temp = *prev;
@@ -68,7 +68,7 @@ void	free_all(char **prev, char **line)
 {
 	free(*prev);
 	*prev = NULL;
-	if (!(**line))
+	if (**line == '\0')
 	{
 		free(*line);
 		*line = NULL;
@@ -81,7 +81,7 @@ char	*get_next_line(int fd)
 	ssize_t		read_size;
 	static char	*prev;
 
-	if (BUFFER_SIZE <= 0 && fd < 0)
+	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
 	if (prev == NULL)
 	{

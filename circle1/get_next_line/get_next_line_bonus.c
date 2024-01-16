@@ -6,7 +6,7 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 21:37:10 by dakang            #+#    #+#             */
-/*   Updated: 2024/01/15 21:54:16 by dakang           ###   ########.fr       */
+/*   Updated: 2024/01/16 12:36:08 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,20 @@ int	make_line(char **prev, char **line)
 	if (i == -1)
 		i = ft_strlen(*prev);
 	*line = ft_substr(*prev, 0, i + 1);
-	if (!(*line))
+	if (*line == NULL)
 	{
 		free(*prev);
-		*prev = 0;
+		*prev = NULL;
 		return (1);
 	}
 	temp = *prev;
 	*prev = ft_substr(temp, i + 1, ft_strlen(temp) - i - 1);
-	if (!(*prev))
+	free(temp);
+	if (*prev == NULL)
 	{
 		free(*line);
-		free(temp);
 		return (1);
 	}
-	else
-		free(temp);
 	return (0);
 }
 
@@ -83,12 +81,12 @@ char	*get_next_line(int fd)
 	ssize_t		read_size;
 	static char	*prev[OPEN_MAX];
 
-	if (BUFFER_SIZE <= 0 && fd < 0)
+	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
-	if (!prev[fd])
+	if (prev[fd] == NULL)
 	{
 		prev[fd] = ft_strdup("");
-		if (!prev[fd])
+		if (prev[fd] == NULL)
 			return (NULL);
 	}
 	if (read_buffer(fd, &read_size, &prev[fd]))

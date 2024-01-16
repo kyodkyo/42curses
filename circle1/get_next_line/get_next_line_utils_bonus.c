@@ -6,7 +6,7 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 21:37:15 by dakang            #+#    #+#             */
-/*   Updated: 2024/01/15 21:50:02 by dakang           ###   ########.fr       */
+/*   Updated: 2024/01/16 12:38:34 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*ft_strjoin(char *temp, char const *buffer)
 		res[i++] = *temp++;
 	while (*buffer)
 		res[i++] = *buffer++;
-	res[i] = 0;
+	res[i] = '\0';
 	return (res);
 }
 
