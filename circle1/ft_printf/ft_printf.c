@@ -6,32 +6,31 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 20:28:10 by dakyo             #+#    #+#             */
-/*   Updated: 2024/01/30 20:33:35 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/01/30 21:37:48 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_specifier(va_list v_list, const char *str, int *idx)
+int	ft_specifier(va_list v_list, const char c)
 {
-	idx++;
-	if (str[*idx] == 'c')
+	if (c == 'c')
 		return (ft_print_c(v_list));
-	else if (str[*idx] == 's')
+	else if (c == 's')
 		return (ft_print_s(v_list));
-	else if (str[*idx] == 'p')
+	else if (c == 'p')
 		return (ft_print_p(v_list));
-	else if (str[*idx] == 'd')
+	else if (c == 'd')
 		return (ft_print_d(v_list));
-	else if (str[*idx] == 'i')
+	else if (c == 'i')
 		return (ft_print_i(v_list));
-	else if (str[*idx] == 'u')
+	else if (c == 'u')
 		return (ft_print_u(v_list));
-	else if (str[*idx] == 'x')
+	else if (c == 'x')
 		return (ft_print_x(v_list));
-	else if (str[*idx] == 'X')
+	else if (c == 'X')
 		return (ft_printl_X(v_list));
-	else if (str[*idx] == '%')
+	else if (c == '%')
 	{
 		write(1, "%%", 1);
 		return (1);
@@ -42,31 +41,29 @@ int	ft_specifier(va_list v_list, const char *str, int *idx)
 
 int	ft_printf(char const *str, ...)
 {
-	int		idx;
 	int		res;
 	int		count;
 	va_list	v_list;
 
-	idx = 0;
-	count = 0;
+	res = 0;
 	va_start(v_list, str);
-	while (str[idx])
+	while (*str)
 	{
-		if (str[idx] == '%')
+		count = 1;
+		if (*str == '%')
 		{
-			res = ft_specifier(v_list, str, &idx);
-			if (res == -1)
+			str++;
+			count = ft_specifier(v_list, *str++);
+			if (count == -1)
 				return (-1);
 		}
 		else
 		{
-			if (write(1, &str[idx], 1) == -1)
+			if (write(1, *str++, 1) == -1)
 				return (-1);
-			res++;
 		}
-		count += res;
-		idx++;
+		res += count;
 	}
 	va_end(v_list);
-	return (count);
+	return (res);
 }
