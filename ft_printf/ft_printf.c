@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 20:28:10 by dakyo             #+#    #+#             */
-/*   Updated: 2024/02/12 02:01:36 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/02/12 16:46:08 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ int	ft_specifier(va_list *v_list, const char c)
 	else if (c == 'u')
 		return (ft_print_u(*v_list));
 	else if (c == 'x')
-		return (ft_print_x(*v_list));
+		return (ft_print_x(*v_list, 1));
 	else if (c == 'X')
-		return (ft_printl_X(*v_list));
+		return (ft_printl_X(*v_list, 2));
 	else if (c == '%')
 	{
 		write(1, "%%", 1);
