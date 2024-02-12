@@ -6,25 +6,25 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 20:28:10 by dakyo             #+#    #+#             */
-/*   Updated: 2024/02/12 16:46:08 by dakang           ###   ########.fr       */
+/*   Updated: 2024/02/12 17:51:45 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_c(va_list *v_list)
+int	ft_print_c(va_list v_list)
 {
 	int		c;
 	int		res;
 
-	c = (char)va_arg(*v_list, int);
+	c = (char)va_arg(v_list, int);
 	res = write(1, &c, 1);
 	if (res == -1)
 		return (-1);
 	return (1);
 }
 
-int	ft_print_s(va_list *v_list)
+int	ft_print_s(va_list v_list)
 {
 	int		len;
 	int		res;
@@ -32,7 +32,7 @@ int	ft_print_s(va_list *v_list)
 
 	len = 0;
 	res = 0;
-	str = va_arg(*v_list, char *);
+	str = va_arg(v_list, char *);
 	if (str == NULL)
 	{
 		res = write(1, "(null)", 6);
@@ -42,7 +42,7 @@ int	ft_print_s(va_list *v_list)
 	}
 	while (*str)
 	{
-		res = write(1, *str, 1);
+		res = write(1, &(*str), 1);
 		if (res == -1)
 			return (-1);
 		len++;
@@ -51,7 +51,7 @@ int	ft_print_s(va_list *v_list)
 	return (len);
 }
 
-int	ft_prinf_p(va_list *v_list)
+int	ft_print_p(va_list v_list)
 {
 	int					i;
 	int					len;
@@ -60,10 +60,14 @@ int	ft_prinf_p(va_list *v_list)
 
 	i = 0;
 	len = 0;
-	address = va_arg(*v_list, unsigned long long);
-	if (address == NULL)
+	address = va_arg(v_list, unsigned long long);
+	if (address == 0)
+	{
 		if (write(1, "0x", 2) == -1)
 			return (-1);
+	}
+	else if (write(1, "0x", 2) == -1)
+		return (-1);
 	while (address >= 16)
 	{
 		arr[i] = "0123456789abcdef"[address % 16];
@@ -71,31 +75,31 @@ int	ft_prinf_p(va_list *v_list)
 		i++;
 	}
 	arr[i] = "0123456789abcdef"[address];
-	len = ft_len(arr, i);
 	if (len == -1)
 		return (-1);
-	return (len + 2);
+	return (len = ft_len(arr, i), len + 2);
 }
 
-int	ft_specifier(va_list *v_list, const char c)
+int	ft_specifier(va_list v_list, const char c)
 {
 	if (c == 'c')
-		return (ft_print_c(*v_list));
+		return (ft_print_c(v_list));
 	else if (c == 's')
-		return (ft_print_s(*v_list));
+		return (ft_print_s(v_list));
 	else if (c == 'p')
-		return (ft_print_p(*v_list));
+		return (ft_print_p(v_list));
 	else if (c == 'i' || c == 'd')
-		return (ft_print_d_i(*v_list));
+		return (ft_print_d_i(v_list));
 	else if (c == 'u')
-		return (ft_print_u(*v_list));
+		return (ft_print_u(v_list));
 	else if (c == 'x')
-		return (ft_print_x(*v_list, 1));
+		return (ft_print_x(v_list, 1));
 	else if (c == 'X')
-		return (ft_printl_X(*v_list, 2));
+		return (ft_print_x(v_list, 2));
 	else if (c == '%')
 	{
-		write(1, "%%", 1);
+		if (write(1, "%%", 1) == -1)
+			return (-1);
 		return (1);
 	}
 	else
@@ -116,13 +120,13 @@ int	ft_printf(char const *str, ...)
 		if (*str == '%')
 		{
 			str++;
-			count = ft_specifier(&v_list, *str++);
+			count = ft_specifier(v_list, *str++);
 			if (count == -1)
 				return (-1);
 		}
 		else
 		{
-			if (write(1, *str++, 1) == -1)
+			if (write(1, &(*str++), 1) == -1)
 				return (-1);
 		}
 		res += count;
