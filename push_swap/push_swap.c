@@ -6,12 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:35:33 by dakyo             #+#    #+#             */
-/*   Updated: 2024/02/18 20:31:21 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/02/18 21:18:49 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
@@ -28,6 +27,7 @@ int	main(int argc, char **argv)
 	while (++i < argc)
 		size += num_count_in_argv(argv[i]);
 	arr = split_input(argc, argv, size);
-	stack_a = make_stack(stack_a);
-	stack_b = make_stack(stack_b);
+	stack_a = make_stack(stack_a, 'a');
+	init_push_stack_a(argc, arr, stack_a);
+	stack_b = make_stack(stack_b, 'b');
 }
