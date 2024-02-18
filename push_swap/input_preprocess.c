@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_proprocess.c                                 :+:      :+:    :+:   */
+/*   input_preprocess.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 13:42:12 by dakyo             #+#    #+#             */
-/*   Updated: 2024/02/18 18:51:07 by dakang           ###   ########.fr       */
+/*   Updated: 2024/02/18 20:27:33 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,23 @@ char	**split_input(int argc, char **argv, int size)
 			while (temp[k] && temp[k] == ' ')
 				k++;
 			while (temp[k] && temp[k] != ' ')
-				arr[j++] = split_in_argv(temp, &k, argc, arr);
+				arr[j++] = split_in_argv(argc, temp, &k, arr);
 		}
 	}
 	arr[size] = 0;
 	return (arr);
 }
 
-char	*split_in_argv(char *argv, int *k, int argc, char **arr)
+char	*split_in_argv(int argc, char *argv, int *k, char **arr)
 {
 	int		i;
-	int len;
+	int		len;
 	char	*res;
 
 	i = 0;
 	len = ft_strlen(argv, *k);
 	res = (char *)malloc(sizeof(char) * len + 1);
-	if (!res)
+	if (res == NULL)
 		return (NULL);
 	while (argv[*k] && argv[*k] != ' ')
 	{
@@ -83,41 +83,37 @@ char	*split_in_argv(char *argv, int *k, int argc, char **arr)
 	res[i] = 0;
 	if (!check_valid(res))
 	{
-		write(1, "Error\n", 6);
-		free_arr(argc, arr, 1);
+		free_arr(argc, arr, res);
+		error_exit();
 	}
 	return (res);
 }
 
-int check_valid(char *str)
+int	check_valid(char *str)
 {
-	int i;
-	int sign;
-	long long res;
+	int			i;
+	int			flag;
+	long long	res;
 
 	i = 0;
-	sign = 1;
+	flag = 1;
 	res = 0;
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
-			sign = -1;
+			flag = -1;
 		i++;
 	}
-	if (!str[])
-}
-
-void free_arr(int argc, char *arr, int flag)
-{
-	int i;
-
-	i = 0;
-	while (i < argc)
+	if (!str[i])
+		return (0);
+	while (str[i])
 	{
-		free(arr[i]);
+		if (str[i] < '0' || '9' < str[i])
+			return (0);
+		res = res * 10 + str[i] - '0';
 		i++;
+		if (res * flag > 2147483647 || res * flag < -2147483648)
+			return (0);
 	}
-	free(arr);
-	if (flag == 1)
-		exit(1);
+	return (1);
 }
