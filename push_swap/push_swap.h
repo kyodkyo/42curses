@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:35:42 by dakyo             #+#    #+#             */
-/*   Updated: 2024/02/18 16:33:45 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/02/18 20:31:00 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,17 @@ typedef struct s_stack
 	struct s_node	*bottom;
 }	t_stack;
 
-/** input_preprocess.c */
-int		num_count_in_argv(char *argv);
-char	**split_input(int argc, char **argv, int size);
-char	*split_in_argv(char *argv, int *k);
+/** etc.c */
+void	error_exit(void);
+void	free_arr(int argc, char **arr, char *res);
 
 /** ft_utils.c */
 int		ft_strlen(const char *str, int k);
+
+/** input_preprocess.c */
+int		num_count_in_argv(char *argv);
+char	**split_input(int argc, char **argv, int size);
+char	*split_in_argv(int argc, char *argv, int *k, char **arr);
+int		check_valid(char *str);
 
 #endif

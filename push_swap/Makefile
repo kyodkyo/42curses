@@ -1,12 +1,13 @@
 CC = cc -Wall -Wextra -Werror
-SRCS = ft_printf.c ft_utils.c
-NAME = libftprintf.a
+NAME = push_swap
+INCLUDE = push_swap.h
+SRCS = etc.c ft_utils.c input_preprocess.c push_swap.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar -rc $(NAME) $(OBJS)
+	$(CC) -o $@ $^
 
 %.o: %.c
 	$(CC) -c $< -o $@

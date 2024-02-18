@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   etc.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 16:35:33 by dakyo             #+#    #+#             */
-/*   Updated: 2024/02/18 20:31:21 by dakyo            ###   ########.fr       */
+/*   Created: 2024/02/18 19:56:07 by dakyo             #+#    #+#             */
+/*   Updated: 2024/02/18 20:07:48 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
-int	main(int argc, char **argv)
+void	error_exit(void)
 {
-	int		i;
-	int		size;
-	char	**arr;
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	write(1, "Error\n", 6);
+	exit(1);
+}
 
-	if (argc < 2)
-		return (0);
+void	free_arr(int argc, char **arr, char *res)
+{
+	int	i;
+
 	i = 0;
-	size = 0;
-	while (++i < argc)
-		size += num_count_in_argv(argv[i]);
-	arr = split_input(argc, argv, size);
-	stack_a = make_stack(stack_a);
-	stack_b = make_stack(stack_b);
+	while (i < argc)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+	free(res);
 }
