@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:35:33 by dakyo             #+#    #+#             */
-/*   Updated: 2024/02/18 21:18:49 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/02/19 15:42:46 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,22 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	i = 0;
-	size = 0;
-	while (++i < argc)
-		size += num_count_in_argv(argv[i]);
+	size = check_valid_input(argc, argv);
 	arr = split_input(argc, argv, size);
-	stack_a = make_stack(stack_a, 'a');
-	init_push_stack_a(argc, arr, stack_a);
-	stack_b = make_stack(stack_b, 'b');
+	stack_a = make_stack();
+	init_push_stack_a(arr, stack_a, size);
+	stack_b = make_stack();
 }
+
+	// printf("DEBUG\n");
+
+	// int j=-1;
+	// t_node	*tmp;
+	// tmp = stack_a->bottom;
+	// while(j < stack_a->size - 1)
+	// {
+	// 	printf("stack : %d\n", tmp->content);
+	// 	tmp = tmp->next;
+	// 	j++;
+	// }
+	// printf("size: %d\n", stack_a->size);

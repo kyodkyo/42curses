@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:53:31 by dakyo             #+#    #+#             */
-/*   Updated: 2024/02/18 21:09:36 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/02/19 11:06:45 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,49 @@ int	ft_atoi(const char *str)
 	return ((int)num * flag);
 }
 
-t_node	*ft_lstnew(int content)
+t_node	*ft_lstnew(t_stack *stack, int content)
 {
 	t_node	*node;
 
 	node = (t_node *)malloc(sizeof(t_node));
 	if (!node)
-		return (NULL);
+	{
+		free_stack(stack);
+		error_exit();
+	}
 	node -> content = content;
 	node -> prev = NULL;
 	node -> next = NULL;
+	return (node);
+}
+
+void	ft_lstadd_back(t_stack *stack, t_node **node, t_node *new)
+{
+	t_node	*temp;
+
+	if (!*node)
+		*node = new;
+	else
+	{
+		temp = ft_lstlast(*node, new);
+		if (!temp)
+		{
+			free_stack(stack);
+			error_exit();
+		}
+		temp -> next = new;
+	}
+}
+
+t_node	*ft_lstlast(t_node *node, t_node *new)
+{
+	while (node -> next)
+	{
+		if (node -> content == new -> content)
+			return (0);
+		node = node -> next;
+	}
+	if (node -> content == new -> content)
+		return (0);
 	return (node);
 }

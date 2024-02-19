@@ -6,11 +6,28 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 13:42:12 by dakyo             #+#    #+#             */
-/*   Updated: 2024/02/18 20:27:33 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/02/19 15:42:07 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	check_valid_input(int argc, char **argv)
+{
+	int	i;
+	int	size;
+
+	i = 1;
+	size = 0;
+	while (i < argc)
+	{
+		if (ft_strlen(argv[i], 0) == 0)
+			error_exit();
+		size += num_count_in_argv(argv[i]);
+		i++;
+	}
+	return (size);
+}
 
 int	num_count_in_argv(char *argv)
 {
@@ -81,7 +98,7 @@ char	*split_in_argv(int argc, char *argv, int *k, char **arr)
 		(*k)++;
 	}
 	res[i] = 0;
-	if (!check_valid(res))
+	if (!check_valid_int(res))
 	{
 		free_arr(argc, arr, res);
 		error_exit();
@@ -89,7 +106,7 @@ char	*split_in_argv(int argc, char *argv, int *k, char **arr)
 	return (res);
 }
 
-int	check_valid(char *str)
+int	check_valid_int(char *str)
 {
 	int			i;
 	int			flag;
