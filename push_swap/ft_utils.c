@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:53:31 by dakyo             #+#    #+#             */
-/*   Updated: 2024/02/19 11:06:45 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/02/19 16:53:10 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,17 @@ void	ft_lstadd_back(t_stack *stack, t_node **node, t_node *new)
 			free_stack(stack);
 			error_exit();
 		}
-		temp -> next = new;
+		temp -> prev = new;
 	}
 }
 
 t_node	*ft_lstlast(t_node *node, t_node *new)
 {
-	while (node -> next)
+	while (node -> prev)
 	{
 		if (node -> content == new -> content)
 			return (0);
-		node = node -> next;
+		node = node -> prev;
 	}
 	if (node -> content == new -> content)
 		return (0);
