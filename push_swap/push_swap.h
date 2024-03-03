@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:35:42 by dakyo             #+#    #+#             */
-/*   Updated: 2024/02/19 15:40:21 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/03 22:23:51 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,25 @@ int		num_count_in_argv(char *argv);
 char	**split_input(int argc, char **argv, int size);
 char	*split_in_argv(int argc, char *argv, int *k, char **arr);
 int		check_valid_int(char *str);
+
+/** pa_pb.c */
+void	pa(t_stack **stack_a, t_stack **stack_b);
+void	pb(t_stack **stack_a, t_stack **stack_b);
+
+/** ra_rb_rr.c */
+void	ra(t_stack **stack_a);
+void	rb(t_stack **stack_b);
+void	rr(t_stack **stack_a, t_stack **stack_b);
+
+/** rra_rrb_rrr.c */
+void	rra(t_stack **stack_a);
+void	rrb(t_stack **stack_b);
+void	rrr(t_stack **stack_a, t_stack **stack_b);
+
+/** sa_sb_ss.c */
+void	sa(t_stack **stack_a);
+void	sb(t_stack **stack_b);
+void	ss(t_stack **stack_a, t_stack **stack_b);
 
 /** set_stack.c */
 t_stack	*make_stack(void);

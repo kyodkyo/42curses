@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:35:33 by dakyo             #+#    #+#             */
-/*   Updated: 2024/02/19 16:55:34 by dakang           ###   ########.fr       */
+/*   Updated: 2024/03/03 22:25:11 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	main(int argc, char **argv)
 {
-	int		i;
 	int		size;
 	char	**arr;
 	t_stack	*stack_a;
@@ -22,7 +21,6 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (0);
-	i = 0;
 	size = check_valid_input(argc, argv);
 	arr = split_input(argc, argv, size);
 	stack_a = make_stack();
