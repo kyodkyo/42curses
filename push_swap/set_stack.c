@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 20:53:18 by dakyo             #+#    #+#             */
-/*   Updated: 2024/02/19 14:04:07 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/06 21:55:14 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void	init_push_stack_a(char **arr, t_stack *stack_a, int size)
 			error_exit();
 		temp = ft_atoi(arr[i]);
 		if (i == 0)
-			stack_a -> bottom = ft_lstnew(stack_a, temp);
+			stack_a->bottom = ft_lstnew(stack_a, temp);
 		else
 		{
 			node = ft_lstnew(stack_a, temp);
-			ft_lstadd_back(stack_a, &stack_a -> bottom, node);
+			ft_lstadd_back(stack_a, &stack_a->bottom, node);
 		}
 		i++;
 	}
-	stack_a -> top = node;
-	stack_a -> size = i;
+	stack_a->top = node;
+	stack_a->size = i;
 }
