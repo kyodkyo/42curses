@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:35:42 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/03 22:23:51 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/06 21:05:33 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,9 @@ void	ss(t_stack **stack_a, t_stack **stack_b);
 /** set_stack.c */
 t_stack	*make_stack(void);
 void	init_push_stack_a(char **arr, t_stack *stack_a, int size);
+
+/** sort_check.c */
+int		a_sort(t_stack *stack_a);
+int		b_sort(t_stack *stack_b);
 
 #endif
