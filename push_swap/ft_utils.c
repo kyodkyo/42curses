@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:53:31 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/06 21:51:25 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/07 22:15:28 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,18 @@ void	ft_lstadd_back(t_stack *stack, t_node **node, t_node *new)
 			free_stack(stack);
 			error_exit();
 		}
-		temp->prev = new;
-		new->next = temp;
+		temp->next = new;
+		new->prev = temp;
 	}
 }
 
 t_node	*ft_lstlast(t_node *node, t_node *new)
 {
-	while (node -> prev)
+	while (node -> next)
 	{
 		if (node -> content == new -> content)
 			return (0);
-		node = node -> prev;
+		node = node -> next;
 	}
 	if (node -> content == new -> content)
 		return (0);

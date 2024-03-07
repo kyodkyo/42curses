@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 21:04:09 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/06 22:15:07 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/07 22:18:33 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	a_sort(t_stack *stack_a)
 		return (1);
 	while (i < size && node->next)
 	{
-		if (node->content < node->next->content)
+		if (node->content > node->next->content)
 			return (0);
 		node = node->next;
 		i++;
