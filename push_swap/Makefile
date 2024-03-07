@@ -1,7 +1,8 @@
 CC = cc # -Wall -Wextra -Werror
 NAME = push_swap
 INCLUDE = push_swap.h
-SRCS = etc.c ft_utils.c input_preprocess.c push_swap.c set_stack.c sort_check.c
+SRCS = etc.c ft_utils.c input_preprocess.c pa_pb.c push_swap.c ra_rb_rr.c rra_rrb_rrr.c \
+		sa_sb_ss.c set_stack.c sort_check.c sorting_hard.c sorting_quick.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

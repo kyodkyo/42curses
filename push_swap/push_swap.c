@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:35:33 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/06 22:16:36 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/07 23:24:54 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int	main(int argc, char **argv)
 	stack_b = make_stack();
 	if (a_sort(stack_a) == 1)
 		return (0);
-	//quick sort
+	if (size <= 5)
+		hard_coding(&stack_a, &stack_b);
+	else
+		quick_sort(&stack_a, &stack_b, stack_a->size);
 }
 
 	// printf("DEBUG\n");

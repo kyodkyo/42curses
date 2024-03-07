@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:35:42 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/06 21:05:33 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/07 23:24:31 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,15 @@ void	init_push_stack_a(char **arr, t_stack *stack_a, int size);
 /** sort_check.c */
 int		a_sort(t_stack *stack_a);
 int		b_sort(t_stack *stack_b);
+
+/** sorting_hard.c */
+int		get_min_content(t_stack **stack_a);
+void	hard_coding(t_stack **stack_a, t_stack **stack_b);
+void	node_3_sorting(t_stack **stack_a);
+void	node_4_sorting(t_stack **stack_a, t_stack **stack_b);
+void	node_5_sorting(t_stack **stack_a, t_stack **stack_b);
+
+/** sorting_quick.c */
+void	quick_sort(t_stack **stack_a, t_stack **stack_b, int size);
 
 #endif
