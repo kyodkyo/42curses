@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:35:42 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/07 23:24:31 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/08 20:13:25 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ void	init_push_stack_a(char **arr, t_stack *stack_a, int size);
 int		a_sort(t_stack *stack_a);
 int		b_sort(t_stack *stack_b);
 
+/** sorting_arr.c */
+int		*get_sorted_arr(t_stack **stack_a);
+int		partition(int *arr, int left, int right);
+void	arr_quick_sort(int *arr, int left, int right);
+
 /** sorting_hard.c */
 int		get_min_content(t_stack **stack_a);
 void	hard_coding(t_stack **stack_a, t_stack **stack_b);
@@ -85,7 +90,14 @@ void	node_3_sorting(t_stack **stack_a);
 void	node_4_sorting(t_stack **stack_a, t_stack **stack_b);
 void	node_5_sorting(t_stack **stack_a, t_stack **stack_b);
 
-/** sorting_quick.c */
+/** sorting_stack.c */
+void	initialize(int *ra_cnt, int *rb_cnt, int *pb_cnt);
+void	ra_rb(t_stack **stack, int *cnt, int sign);
+void	set_pivot(t_stack **stack_a, int *pivot1, int *pivot2);
 void	quick_sort(t_stack **stack_a, t_stack **stack_b, int size);
+
+/** sorting_stack2.c */
+void	b_to_a(t_stack **stack_a, t_stack **stack_b, int size);
+void	a_to_b(t_stack **stack_a, t_stack **stack_b, int size);
 
 #endif
