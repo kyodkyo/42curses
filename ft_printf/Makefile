@@ -1,15 +1,16 @@
-CC = gcc -Wall -Wextra -Werror
+CC = cc -Wall -Wextra -Werror
 SRCS = ft_printf.c ft_utils.c
 NAME = libftprintf.a
 OBJS = $(SRCS:.c=.o)
+INCLUDE = ft_printf.h
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar -rc $(NAME) $(OBJS)
+	ar -rc $@ $^
 
 %.o: %.c
-	$(CC) -c $< -o $@
+	$(CC) -c $< -o $@ -I $(INCLUDE)
 
 clean:
 	rm -rf $(OBJS)
