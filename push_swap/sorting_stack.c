@@ -6,11 +6,32 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:02:39 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/08 20:12:17 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/27 23:57:29 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	is_stack_sort(t_stack *stack)
+{
+	int		i;
+	int		size;
+	t_node	*node;
+
+	i = 1;
+	size = stack->size;
+	node = stack->top;
+	if (size == 1)
+		return (1);
+	while (i < size && node->next)
+	{
+		if (node->content > node->next->content)
+			return (0);
+		node = node->next;
+		i++;
+	}
+	return (1);
+}
 
 void	initialize(int *ra_cnt, int *rb_cnt, int *pb_cnt)
 {
