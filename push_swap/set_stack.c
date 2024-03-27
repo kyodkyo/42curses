@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/18 20:53:18 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/07 22:16:00 by dakyo            ###   ########.fr       */
+/*   Created: 2024/03/27 23:59:37 by dakyo             #+#    #+#             */
+/*   Updated: 2024/03/27 23:59:50 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_stack	*make_stack(void)
 
 	stack = (t_stack *)malloc(sizeof(t_stack));
 	stack -> size = 0;
-	// stack -> name = NULL;
 	stack -> top = NULL;
 	stack -> bottom = NULL;
 	return (stack);

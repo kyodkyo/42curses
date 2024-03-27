@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:35:33 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/08 15:09:28 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/27 23:45:50 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	stack_a = make_stack();
 	init_push_stack_a(arr, stack_a, size);
 	stack_b = make_stack();
-	if (a_sort(stack_a) == 1)
+	if (is_stack_sort(stack_a) == 1)
 		return (0);
 	if (size <= 5)
 		hard_coding(&stack_a, &stack_b);
