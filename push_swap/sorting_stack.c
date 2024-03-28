@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:02:39 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/27 23:57:29 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/28 18:11:11 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	quick_sort(t_stack **stack_a, t_stack **stack_b, int size)
 
 	initialize(&ra_cnt, &rb_cnt, &pb_cnt);
 	set_pivot(stack_a, &pivot1, &pivot2);
-	while (size--)
+	while (size-- > 0)
 	{
 		if ((*stack_a)->top->content >= pivot1)
 			ra_rb(stack_a, &ra_cnt, 1);
