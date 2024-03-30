@@ -6,21 +6,19 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:02:49 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/08 17:04:47 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/30 23:17:20 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*get_sorted_arr(t_stack **stack_a)
+int	*get_sorted_arr(t_stack **stack_a, int size)
 {
 	int		i;
-	int		size;
 	int		*arr;
 	t_node	*temp;
 
 	i = 0;
-	size = (*stack_a)->size;
 	arr = (int *)malloc(sizeof(int) * size);
 	temp = (*stack_a)->top;
 	while (i < size)
@@ -49,15 +47,15 @@ int	partition(int *arr, int left, int right)
 		if (arr[j] <= pivot)
 		{
 			i++;
-			temp = arr[i];
-			arr[i] = arr[j];
-			arr[j] = temp;
+			temp = arr[j];
+			arr[j] = arr[i];
+			arr[i] = temp;
 		}
 		j++;
 	}
-	temp = arr[i + 1];
-	arr[i + 1] = arr[right];
-	arr[right] = temp;
+	temp = arr[right];
+	arr[right] = arr[i + 1];
+	arr[i + 1] = temp;
 	return (i + 1);
 }
 
