@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pa_pb.c                                            :+:      :+:    :+:   */
+/*   pa_pb_ra_rb_rr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 21:35:45 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/28 00:02:55 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/30 23:06:48 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	pa(t_stack **stack_a, t_stack **stack_b)
 	(*stack_b)->top = (*stack_b)->top->next;
 	temp->next = (*stack_a)->top;
 	(*stack_a)->top = temp;
+	if (!(*stack_b)->top)
+	{
+		(*stack_b)->top = 0;
+		(*stack_b)->bottom = 0;
+	}
 	write(1, "pa\n", 3);
 }
 
@@ -35,6 +40,8 @@ void	pb(t_stack **stack_a, t_stack **stack_b)
 	(*stack_a)->top = (*stack_a)->top->next;
 	temp->next = (*stack_b)->top;
 	(*stack_b)->top = temp;
+	if (!(*stack_b)->bottom)
+		(*stack_b)->bottom = temp;
 	write(1, "pb\n", 3);
 }
 
@@ -48,9 +55,9 @@ void	ra(t_stack **stack_a)
 	(*stack_a)->top = (*stack_a)->top->next;
 	(*stack_a)->top->prev = NULL;
 	temp->next = NULL;
-	temp->prev = (*stack_a)->bottom;
 	(*stack_a)->bottom->next = temp;
-	(*stack_a)->bottom = (*stack_a)->bottom->next;
+	temp->prev = (*stack_a)->bottom;
+	(*stack_a)->bottom = temp;
 	write(1, "ra\n", 3);
 }
 
@@ -64,9 +71,9 @@ void	rb(t_stack **stack_b)
 	(*stack_b)->top = (*stack_b)->top->next;
 	(*stack_b)->top->prev = NULL;
 	temp->next = NULL;
-	temp->prev = (*stack_b)->bottom;
 	(*stack_b)->bottom->next = temp;
-	(*stack_b)->bottom = (*stack_b)->bottom->next;
+	temp->prev = (*stack_b)->bottom;
+	(*stack_b)->bottom = temp;
 	write(1, "rb\n", 3);
 }
 

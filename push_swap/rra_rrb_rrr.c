@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 21:51:08 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/03 22:22:57 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/30 23:00:33 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	rrb(t_stack **stack_b)
 
 	if (!(*stack_b)->top || !(*stack_b)->top->next)
 		return ;
+	temp = (*stack_b)->bottom;
 	(*stack_b)->bottom = (*stack_b)->bottom->prev;
 	(*stack_b)->bottom->next = NULL;
 	temp->prev = NULL;
