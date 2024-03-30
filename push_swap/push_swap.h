@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:35:42 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/28 00:07:13 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/30 23:17:57 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,21 @@ void	ss(t_stack **stack_a, t_stack **stack_b);
 /** set_stack.c */
 t_stack	*make_stack(void);
 void	init_push_stack_a(char **arr, t_stack *stack_a, int size);
+int		check_a_stack(t_node *node, int size);
+int		check_b_stack(t_node *node, int size);
+int		is_stack_sort(t_stack *stack, int size, int sign);
 
 /** sorting_arr.c */
-int		*get_sorted_arr(t_stack **stack_a);
+int		*get_sorted_arr(t_stack **stack_a, int size);
 int		partition(int *arr, int left, int right);
 void	arr_quick_sort(int *arr, int left, int right);
 
 /** sorting_hard.c */
-int		get_min_content(t_stack **stack_a);
-void	hard_coding(t_stack **stack_a, t_stack **stack_b);
-void	node_3_sorting(t_stack **stack_a);
-void	node_4_sorting(t_stack **stack_a, t_stack **stack_b);
-void	node_5_sorting(t_stack **stack_a, t_stack **stack_b);
+void	hard_coding(t_stack **stack_a, t_stack **stack_b, int size, int flag);
+void	three_node_a_sort(t_stack **stack_a, int cnt);
+void	under_three_a_sort(t_stack **stack_a, int cnt);
+void	three_node_b_sort(t_stack **stack_b, int cnt);
+void	under_three_b_sort(t_stack **stack_b, int cnt);
 
 /** sorting_quick.c */
 void	arr_initialize(int *arr);
@@ -91,17 +94,16 @@ void	b_to_a(t_stack **stack_a, t_stack **stack_b, int size);
 void	b_to_a_2(t_stack **stack_a, t_stack **stack_b, int size, int *arr);
 
 /** sorting_stack.c */
-int		is_stack_sort(t_stack *stack);
 void	initialize(int *ra_cnt, int *rb_cnt, int *pb_cnt);
 void	ra_rb(t_stack **stack, int *cnt, int sign);
-void	set_pivot(t_stack **stack_a, int *pivot1, int *pivot2);
+void	set_pivot(t_stack **stack_a, int *pivot1, int *pivot2, int size);
 void	quick_sort(t_stack **stack_a, t_stack **stack_b, int size);
 
 /** sorting_utils.c */
 int		count_stack_size(t_stack **stack);
 int		rrr_count(t_stack **stack_a, t_stack **stack_b, int ra, int rb);
 void	rrb_a_to_b(t_stack **stack_b, int rb_count, int n);
-void	pb_count(t_stack **stack_a, t_stack **stack_b, int *count);
+void	pa_pb(t_stack **stack_a, t_stack **stack_b, int *count, int sign);
 void	rr_count(t_stack **stack_a, t_stack **stack_b, int *count, int *n);
 
 #endif

@@ -1,4 +1,4 @@
-CC = cc # -Wall -Wextra -Werror
+CC = cc -Wall -Wextra -Werror
 NAME = push_swap
 INCLUDE = push_swap.h
 SRCS = etc.c ft_utils.c input_preprocess.c pa_pb_ra_rb_rr.c \
