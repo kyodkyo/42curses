@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:11:10 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/27 23:53:05 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/30 21:47:59 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,12 @@ void	rrb_a_to_b(t_stack **stack_b, int rb_count, int n)
 	}
 }
 
-void	pb_count(t_stack **stack_a, t_stack **stack_b, int *count)
+void	pa_pb(t_stack **stack_a, t_stack **stack_b, int *count, int sign)
 {
-	pb(stack_a, stack_b);
+	if (sign == 1)
+		pa(stack_a, stack_b);
+	else if (sign == 2)
+		pb(stack_a, stack_b);
 	(*count)++;
 }
 
