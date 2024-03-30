@@ -6,32 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:02:39 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/28 18:11:11 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/30 23:22:17 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	is_stack_sort(t_stack *stack)
-{
-	int		i;
-	int		size;
-	t_node	*node;
-
-	i = 1;
-	size = stack->size;
-	node = stack->top;
-	if (size == 1)
-		return (1);
-	while (i < size && node->next)
-	{
-		if (node->content > node->next->content)
-			return (0);
-		node = node->next;
-		i++;
-	}
-	return (1);
-}
 
 void	initialize(int *ra_cnt, int *rb_cnt, int *pb_cnt)
 {
@@ -49,13 +28,11 @@ void	ra_rb(t_stack **stack, int *cnt, int sign)
 	(*cnt)++;
 }
 
-void	set_pivot(t_stack **stack_a, int *pivot1, int *pivot2)
+void	set_pivot(t_stack **stack_a, int *pivot1, int *pivot2, int size)
 {
-	int	size;
 	int	*arr;
 
-	size = (*stack_a)->size;
-	arr = get_sorted_arr(stack_a);
+	arr = get_sorted_arr(stack_a, size);
 	*pivot1 = arr[size - (size / 3) - 1];
 	*pivot2 = arr[size / 3];
 	free(arr);
@@ -70,7 +47,7 @@ void	quick_sort(t_stack **stack_a, t_stack **stack_b, int size)
 	int	pivot2;
 
 	initialize(&ra_cnt, &rb_cnt, &pb_cnt);
-	set_pivot(stack_a, &pivot1, &pivot2);
+	set_pivot(stack_a, &pivot1, &pivot2, size);
 	while (size-- > 0)
 	{
 		if ((*stack_a)->top->content >= pivot1)
