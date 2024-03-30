@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 23:44:18 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/28 00:15:10 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/30 23:22:36 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	a_to_b(t_stack **stack_a, t_stack **stack_b, int size)
 
 	n = 0;
 	a_size = count_stack_size(stack_a);
-	if (is_stack_sort(*stack_a))
+	if (is_stack_sort(*stack_a, size, 1))
 		return ;
-	if (size <= 5)
-		return (node_5_sorting(stack_a, stack_b));
+	if (size <= 3)
+		return (hard_coding(stack_a, stack_b, size, 1));
 	arr_initialize(arr);
 	a_to_b_2(stack_a, stack_b, size, arr);
 	if (a_size != size)
@@ -59,21 +59,19 @@ void	a_to_b_2(t_stack **stack_a, t_stack **stack_b, int size, int *arr)
 	int	pivot[2];
 
 	n = -1;
-	set_pivot(stack_a, &pivot[0], &pivot[1]);
+	set_pivot(stack_a, &pivot[0], &pivot[1], size);
 	while (++n < size)
 	{
 		if ((*stack_a)->top->content >= pivot[0])
 			ra_rb(stack_a, &arr[0], 1);
 		else
 		{
-			pb_count(stack_a, stack_b, &arr[1]);
+			pa_pb(stack_a, stack_b, &arr[1], 2);
 			if ((*stack_b)->top->content > pivot[1])
 			{
-				if ((*stack_a)->top != NULL && n + 1 < size)
-				{
-					if ((*stack_a)->top->content >= pivot[0])
-						rr_count(stack_a, stack_b, &arr[0], &n);
-				}
+				if ((*stack_a)->top != NULL && n + 1 < size
+					&& (*stack_a)->top->content >= pivot[0])
+					rr_count(stack_a, stack_b, &arr[0], &n);
 				else
 					rb(stack_b);
 				arr[2]++;
@@ -89,13 +87,14 @@ void	b_to_a(t_stack **stack_a, t_stack **stack_b, int size)
 
 	n = size;
 	arr_initialize(arr);
-	if (is_stack_sort(*stack_b))
+	if (is_stack_sort(*stack_b, size, 2))
 	{
 		while (n-- > 0)
 			pa(stack_a, stack_b);
+		return ;
 	}
-	if (size <= 5)
-		return (node_5_sorting(stack_a, stack_b));
+	if (size <= 3)
+		return (hard_coding(stack_a, stack_b, size, 2));
 	b_to_a_2(stack_a, stack_b, size, arr);
 	a_to_b(stack_a, stack_b, arr[1] - arr[0]);
 	n = -1;
@@ -114,21 +113,19 @@ void	b_to_a_2(t_stack **stack_a, t_stack **stack_b, int size, int *arr)
 	int	pivot[2];
 
 	n = -1;
-	set_pivot(stack_a, &pivot[0], &pivot[1]);
+	set_pivot(stack_a, &pivot[0], &pivot[1], size);
 	while (++n < size)
 	{
 		if ((*stack_b)->top->content < pivot[1])
 			ra_rb(stack_a, &arr[2], 2);
 		else
 		{
-			pb_count(stack_a, stack_b, &arr[1]);
+			pa_pb(stack_a, stack_b, &arr[1], 1);
 			if ((*stack_a)->top->content < pivot[0])
 			{
-				if ((*stack_b)->top != NULL && n + 1 < size)
-				{
-					if ((*stack_b)->top->content < pivot[1])
-						rr_count(stack_a, stack_b, &arr[2], &n);
-				}
+				if ((*stack_b)->top != NULL && n + 1 < size
+					&& (*stack_b)->top->content < pivot[1])
+					rr_count(stack_a, stack_b, &arr[2], &n);
 				else
 					ra(stack_a);
 				arr[0]++;
