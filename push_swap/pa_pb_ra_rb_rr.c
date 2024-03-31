@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 21:35:45 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/30 23:06:48 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/31 18:49:37 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,25 @@ void	rb(t_stack **stack_b)
 
 void	rr(t_stack **stack_a, t_stack **stack_b)
 {
-	ra(stack_a);
-	rb(stack_b);
+	t_node	*temp;
+
+	if (!(*stack_a)->top || !(*stack_a)->top->next)
+		return ;
+	temp = (*stack_a)->top;
+	(*stack_a)->top = (*stack_a)->top->next;
+	(*stack_a)->top->prev = NULL;
+	temp->next = NULL;
+	(*stack_a)->bottom->next = temp;
+	temp->prev = (*stack_a)->bottom;
+	(*stack_a)->bottom = temp;
+	if (!(*stack_b)->top || !(*stack_b)->top->next)
+		return ;
+	temp = (*stack_b)->top;
+	(*stack_b)->top = (*stack_b)->top->next;
+	(*stack_b)->top->prev = NULL;
+	temp->next = NULL;
+	(*stack_b)->bottom->next = temp;
+	temp->prev = (*stack_b)->bottom;
+	(*stack_b)->bottom = temp;
 	write(1, "rr\n", 3);
 }

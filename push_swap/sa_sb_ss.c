@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 21:18:01 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/03 21:19:09 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/31 18:50:45 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,20 @@ void	sb(t_stack **stack_b)
 
 void	ss(t_stack **stack_a, t_stack **stack_b)
 {
-	sa(stack_a);
-	sb(stack_b);
+	t_node	*temp;
+	int		data;
+
+	if (!(*stack_a)->top || !(*stack_a)->top->next)
+		return ;
+	temp = (*stack_a)->top->next;
+	data = temp->content;
+	temp->content = (*stack_a)->top->content;
+	(*stack_a)->top->content = data;
+	if (!(*stack_b)->top || !(*stack_b)->top->next)
+		return ;
+	temp = (*stack_b)->top->next;
+	data = temp->content;
+	temp->content = (*stack_b)->top->content;
+	(*stack_b)->top->content = data;
 	write(1, "ss\n", 3);
 }

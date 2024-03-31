@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 23:44:18 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/30 23:22:36 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/31 18:06:22 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,11 @@ void	b_to_a_2(t_stack **stack_a, t_stack **stack_b, int size, int *arr)
 	int	pivot[2];
 
 	n = -1;
-	set_pivot(stack_a, &pivot[0], &pivot[1], size);
+	set_pivot(stack_b, &pivot[0], &pivot[1], size);
 	while (++n < size)
 	{
 		if ((*stack_b)->top->content < pivot[1])
-			ra_rb(stack_a, &arr[2], 2);
+			ra_rb(stack_b, &arr[2], 2);
 		else
 		{
 			pa_pb(stack_a, stack_b, &arr[1], 1);
