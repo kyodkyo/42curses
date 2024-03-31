@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:53:31 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/30 17:22:08 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/03/31 18:03:43 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	ft_strlen(const char *str, int k)
 	i = 0;
 	if (!str)
 		return (0);
-
 	while (str[i] && str[i] == ' ')
 		i++;
 	while (str[i] && str[i++] != ' ')
