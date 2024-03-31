@@ -19,14 +19,12 @@ int	ft_strlen(const char *str, int k)
 	i = 0;
 	if (!str)
 		return (0);
-	while (str[k] && str[k] != ' ')
-	{
-		if (str[k] == ' ')
-			break ;
-		k++;
+
+	while (str[i] && str[i] == ' ')
 		i++;
-	}
-	return (i);
+	while (str[i] && str[i++] != ' ')
+		k++;
+	return (k);
 }
 
 int	ft_atoi(const char *str)
