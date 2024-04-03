@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_checker.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:57:25 by dakang            #+#    #+#             */
-/*   Updated: 2024/04/02 17:51:56 by dakang           ###   ########.fr       */
+/*   Updated: 2024/04/03 13:41:17 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ void	check_sorted(t_stack **stack_a, t_stack **stack_b)
 		}
 		free(com);
 	}
+	if (is_stack_sort(stack_a, (*stack_a)->size, 1) == 0 || (*stack_b)->top)
+		write(1, "KO\n", 3);
+	else
+		write(1, "OK\n", 3);
+	//free_all(com);
 }
 
 int	compare_command(char *s1, char *s2)
@@ -70,7 +75,6 @@ int	check_command1(t_stack **stack_a, t_stack **stack_b, char *com)
 	else
 		return (-1);
 	return (0);
-
 }
 
 int	check_command2(t_stack **stack_a, t_stack **stack_b, char *com)

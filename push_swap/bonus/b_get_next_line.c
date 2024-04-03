@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_get_next_line.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:47:27 by dakang            #+#    #+#             */
-/*   Updated: 2024/04/02 14:47:39 by dakang           ###   ########.fr       */
+/*   Updated: 2024/04/03 13:40:42 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	make_line(char **prev, char **line)
 
 	i = ft_strchr(*prev);
 	if (i == -1)
-		i = ft_strlen(*prev);
+		i = check_len(*prev);
 	*line = ft_substr(*prev, 0, i + 1);
 	if (*line == NULL)
 	{
@@ -54,7 +54,7 @@ int	make_line(char **prev, char **line)
 		return (1);
 	}
 	temp = *prev;
-	*prev = ft_substr(temp, i + 1, ft_strlen(temp) - i - 1);
+	*prev = ft_substr(temp, i + 1, check_len(temp) - i - 1);
 	free(temp);
 	if (*prev == NULL)
 	{

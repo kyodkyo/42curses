@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   b_get_next_line_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:48:02 by dakang            #+#    #+#             */
-/*   Updated: 2024/04/02 14:48:12 by dakang           ###   ########.fr       */
+/*   Updated: 2024/04/03 13:40:19 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bonus.h"
 
-int	ft_strlen(char const *str)
+int	check_len(char const *str)
 {
 	int	i;
 
@@ -61,7 +61,7 @@ char	*ft_strjoin(char *temp, char const *buffer)
 	int		len;
 
 	i = 0;
-	len = ft_strlen(temp) + ft_strlen(buffer);
+	len = check_len(temp) + check_len(buffer);
 	res = (char *)malloc(sizeof(char) * (len + 1));
 	if (res == NULL)
 		return (NULL);
@@ -80,7 +80,7 @@ char	*ft_substr(char const *str, int start, int end)
 	char	*res;
 
 	i = 0;
-	len = ft_strlen(str);
+	len = check_len(str);
 	if (str == NULL)
 	{
 		res = ft_strdup("");
