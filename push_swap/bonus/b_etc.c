@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_etc.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:56:07 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/02 17:44:47 by dakang           ###   ########.fr       */
+/*   Updated: 2024/04/06 13:56:48 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,20 @@ void	error_exit(void)
 	exit(1);
 }
 
-void	free_arr(int argc, char **arr, char *res)
+void	free_arr(int argc, char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (i < argc)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+void	free_arr_res(int argc, char **arr, char *res)
 {
 	int	i;
 
@@ -45,4 +58,11 @@ void	free_stack(t_stack *stack)
 		node = NULL;
 		node = temp;
 	}
+}
+
+void	free_stack_exit(t_stack *stack_a, t_stack *stack_b)
+{
+	free_stack(stack_a);
+	free_stack(stack_b);
+	error_exit();
 }

@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:37:48 by dakang            #+#    #+#             */
-/*   Updated: 2024/04/03 13:40:02 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/06 15:15:47 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ int		check_command2(t_stack **stack_a, t_stack **stack_b, char *com);
 
 /** b_etc.c */
 void	error_exit(void);
-void	free_arr(int argc, char **arr, char *res);
+void	free_arr(int argc, char **arr);
+void	free_arr_res(int argc, char **arr, char *res);
 void	free_stack(t_stack *stack);
+void	free_stack_exit(t_stack *stack_a, t_stack *stack_b);
 
 /** b_ft_utils.c */
 int		ft_strlen(const char *str, int k);

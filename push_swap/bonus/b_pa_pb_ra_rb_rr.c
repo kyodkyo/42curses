@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_pa_pb_ra_rb_rr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 21:35:45 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/02 17:50:19 by dakang           ###   ########.fr       */
+/*   Updated: 2024/04/06 15:38:37 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	pa(t_stack **stack_a, t_stack **stack_b)
 		(*stack_b)->top = 0;
 		(*stack_b)->bottom = 0;
 	}
-	write(1, "pa\n", 3);
 }
 
 void	pb(t_stack **stack_a, t_stack **stack_b)
@@ -42,7 +41,6 @@ void	pb(t_stack **stack_a, t_stack **stack_b)
 	(*stack_b)->top = temp;
 	if (!(*stack_b)->bottom)
 		(*stack_b)->bottom = temp;
-	write(1, "pb\n", 3);
 }
 
 void	ra(t_stack **stack_a)
@@ -58,7 +56,6 @@ void	ra(t_stack **stack_a)
 	(*stack_a)->bottom->next = temp;
 	temp->prev = (*stack_a)->bottom;
 	(*stack_a)->bottom = temp;
-	write(1, "ra\n", 3);
 }
 
 void	rb(t_stack **stack_b)
@@ -74,7 +71,6 @@ void	rb(t_stack **stack_b)
 	(*stack_b)->bottom->next = temp;
 	temp->prev = (*stack_b)->bottom;
 	(*stack_b)->bottom = temp;
-	write(1, "rb\n", 3);
 }
 
 void	rr(t_stack **stack_a, t_stack **stack_b)
@@ -99,5 +95,4 @@ void	rr(t_stack **stack_a, t_stack **stack_b)
 	(*stack_b)->bottom->next = temp;
 	temp->prev = (*stack_b)->bottom;
 	(*stack_b)->bottom = temp;
-	write(1, "rr\n", 3);
 }

@@ -6,11 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 13:34:49 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/03 13:34:51 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/06 14:00:05 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "bonus.h"
 
 int	check_valid_input(int argc, char **argv)
 {
@@ -100,7 +100,7 @@ char	*split_in_argv(int argc, char *argv, int *k, char **arr)
 	res[i] = 0;
 	if (!check_valid_int(res))
 	{
-		free_arr(argc, arr, res);
+		free_arr_res(argc, arr, res);
 		error_exit();
 	}
 	return (res);

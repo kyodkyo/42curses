@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:57:25 by dakang            #+#    #+#             */
-/*   Updated: 2024/04/03 13:41:17 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/06 13:59:47 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,17 @@ void	check_sorted(t_stack **stack_a, t_stack **stack_b)
 		{
 			res = check_command2(stack_a, stack_b, com);
 			if (res == -1)
-				error_exit();
-				//free?
+			{
+				free(com);
+				free_stack_exit(*stack_a, *stack_b);
+			}
 		}
 		free(com);
 	}
-	if (is_stack_sort(stack_a, (*stack_a)->size, 1) == 0 || (*stack_b)->top)
+	if (is_stack_sort(*stack_a, (*stack_a)->size, 1) == 0 || (*stack_b)->top)
 		write(1, "KO\n", 3);
 	else
 		write(1, "OK\n", 3);
-	//free_all(com);
 }
 
 int	compare_command(char *s1, char *s2)
