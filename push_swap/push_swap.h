@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:35:42 by dakyo             #+#    #+#             */
-/*   Updated: 2024/03/30 23:17:57 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/06 15:15:07 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 
 typedef struct s_node
 {
@@ -33,7 +32,8 @@ typedef struct s_stack
 
 /** etc.c */
 void	error_exit(void);
-void	free_arr(int argc, char **arr, char *res);
+void	free_arr(int argc, char **arr);
+void	free_arr_res(int argc, char **arr, char *res);
 void	free_stack(t_stack *stack);
 
 /** ft_utils.c */

@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 13:42:12 by dakyo             #+#    #+#             */
-/*   Updated: 2024/02/19 15:42:07 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/05 19:40:52 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	*split_in_argv(int argc, char *argv, int *k, char **arr)
 	res[i] = 0;
 	if (!check_valid_int(res))
 	{
-		free_arr(argc, arr, res);
+		free_arr_res(argc, arr, res);
 		error_exit();
 	}
 	return (res);

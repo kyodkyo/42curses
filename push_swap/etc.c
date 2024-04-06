@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:56:07 by dakyo             #+#    #+#             */
-/*   Updated: 2024/02/18 21:17:54 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/06 13:56:32 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,20 @@ void	error_exit(void)
 	exit(1);
 }
 
-void	free_arr(int argc, char **arr, char *res)
+void	free_arr(int argc, char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (i < argc)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+void	free_arr_res(int argc, char **arr, char *res)
 {
 	int	i;
 
