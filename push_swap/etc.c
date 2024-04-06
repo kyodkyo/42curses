@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   etc.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:56:07 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/06 13:56:32 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/06 17:32:10 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void	free_stack(t_stack *stack)
 	t_node	*temp;
 	t_node	*node;
 
-	node = stack -> top;
+	node = stack->top;
 	while (node)
 	{
-		temp = node -> next;
+		temp = node->next;
 		free(node);
 		node = NULL;
 		node = temp;

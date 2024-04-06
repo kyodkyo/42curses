@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:35:33 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/06 15:27:21 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/06 17:42:33 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-#include <stdio.h>
-
-void f()
-{
-	system("leaks push_swap");
-}
 
 int	main(int argc, char **argv)
 {
@@ -26,7 +19,6 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 
-	atexit(f);
 	if (argc < 2)
 		return (0);
 	size = check_valid_input(argc, argv);
@@ -42,5 +34,7 @@ int	main(int argc, char **argv)
 	else
 		quick_sort(&stack_a, &stack_b, size);
 	free_stack(stack_a);
+	free(stack_a);
 	free_stack(stack_b);
+	free(stack_b);
 }

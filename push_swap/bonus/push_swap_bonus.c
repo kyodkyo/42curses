@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   push_swap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:57:10 by dakang            #+#    #+#             */
-/*   Updated: 2024/04/06 15:30:57 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/06 17:46:47 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bonus.h"
-
-void f()
-{
-	system("leaks checker");
-}
+#include "push_swap_bonus.h"
 
 int	main(int argc, char **argv)
 {
@@ -24,7 +19,6 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 
-	atexit(f);
 	if (argc < 2)
 		return (0);
 	size = check_valid_input(argc, argv);
@@ -35,5 +29,7 @@ int	main(int argc, char **argv)
 	free_arr(argc, arr);
 	check_sorted(&stack_a, &stack_b);
 	free_stack(stack_a);
+	free(stack_a);
 	free_stack(stack_b);
+	free(stack_b);
 }

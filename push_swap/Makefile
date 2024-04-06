@@ -1,4 +1,5 @@
-CC = cc -Wall -Wextra -Werror -g3 
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = push_swap
 NAME_BONUS = checker
@@ -9,9 +10,9 @@ SRCS = etc.c ft_utils.c input_preprocess.c pa_pb_ra_rb_rr.c push_swap.c rra_rrb_
 		set_stack.c sorting_arr.c sorting_hard.c sorting_quick.c sorting_stack.c sorting_utils.c
 
 BONUS_DIR = ./bonus/
-SRCS_BONUS = $(BONUS_DIR)b_checker.c $(BONUS_DIR)b_etc.c $(BONUS_DIR)b_ft_utils.c $(BONUS_DIR)b_get_next_line_utils.c \
-			$(BONUS_DIR)b_get_next_line.c $(BONUS_DIR)b_input_preprocess.c $(BONUS_DIR)b_pa_pb_ra_rb_rr.c \
-			$(BONUS_DIR)b_rra_rrb_rrr.c $(BONUS_DIR)b_set_stack.c $(BONUS_DIR)main.c $(BONUS_DIR)p_sa_sb_ss.c
+SRCS_BONUS = $(BONUS_DIR)checker_bonus.c $(BONUS_DIR)etc_bonus.c $(BONUS_DIR)ft_utils_bonus.c $(BONUS_DIR)get_next_line_bonus.c \
+			$(BONUS_DIR)get_next_line_utils_bonus.c $(BONUS_DIR)input_preprocess_bonus.c $(BONUS_DIR)pa_pb_ra_rb_rr_bonus.c \
+			$(BONUS_DIR)push_swap_bonus.c $(BONUS_DIR)rra_rrb_rrr_bonus.c $(BONUS_DIR)sa_sb_ss_bonus.c $(BONUS_DIR)set_stack_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
@@ -21,10 +22,10 @@ all: $(NAME)
 bonus : $(NAME_BONUS)
 
 $(NAME): $(OBJS)
-	$(CC) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 $(NAME_BONUS): $(OBJS_BONUS)
-	$(CC) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 %.o: %.c
 	$(CC) -c $< -o $@

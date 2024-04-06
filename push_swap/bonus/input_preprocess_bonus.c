@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   b_input_preprocess.c                               :+:      :+:    :+:   */
+/*   input_preprocess_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 13:34:49 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/06 14:00:05 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/06 17:46:57 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bonus.h"
+#include "push_swap_bonus.h"
 
 int	check_valid_input(int argc, char **argv)
 {
