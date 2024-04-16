@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_valid.c                                      :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/14 16:33:18 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/15 21:53:56 by dakyo            ###   ########.fr       */
+/*   Created: 2024/04/15 21:59:10 by dakyo             #+#    #+#             */
+/*   Updated: 2024/04/15 22:07:08 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_input(int argc, char *argv)
+void	*ft_bzero(void *map, size_t len)
 {
-	int	i;
-	int	fd;
+	size_t	i;
+	char	*result;
 
 	i = 0;
-	if (argc != 2)
-		error_exit();
-	while (argv[i])
+	result = (char *)map;
+	while (i < len)
+	{
+		result[i] = 0;
 		i++;
-	if (argv[i-4] != '.' || argv[i-3] != 'b')
-		error_exit();
-	if (argv[i-2] != 'e' || argv[i-1] != 'r')
-		error_exit();
-	fd = open(argv, O_RDONLY);
-	if (fd < 0)
-		error_exit();
-	return (fd);
+	}
+	return (result);
 }

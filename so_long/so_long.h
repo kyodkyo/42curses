@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:23:00 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/14 17:49:58 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/15 22:07:58 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 # include "./mlx/mlx.h"
 
-typedef struct s_game {
-    char **map;
-}   t_game;
+typedef struct s_map {
+	char	**map;
+}	t_map;
+
+/** check_valid.c */
+int		check_input(int argc, char *argv);
+
+/** ft_utils.c */
+void	*ft_bzero(void *map, size_t len);
 
 /** get_next_line_utils.c*/
 int		ft_strlen(char const *str);
