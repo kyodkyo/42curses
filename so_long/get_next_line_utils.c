@@ -6,11 +6,11 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:27:17 by dakang            #+#    #+#             */
-/*   Updated: 2024/01/16 12:40:08 by dakang           ###   ########.fr       */
+/*   Updated: 2024/04/16 15:32:07 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "so_long.h"
 
 int	ft_strlen(char const *str)
 {
@@ -54,23 +54,29 @@ char	*ft_strdup(char const *str)
 	return (res);
 }
 
-char	*ft_strjoin(char *temp, char const *buffer)
+char	*ft_strjoin(char *s1, char const *s2)
 {
-	int		i;
-	int		len;
-	char	*res;
+	size_t	len;
+	size_t	i;
+	char	*str;
 
+	len = ft_strlen(s1) + ft_strlen(s2);
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (0);
 	i = 0;
-	len = ft_strlen(temp) + ft_strlen(buffer);
-	res = (char *)malloc(sizeof(char) * (len + 1));
-	if (res == NULL)
-		return (NULL);
-	while (*temp)
-		res[i++] = *temp++;
-	while (*buffer)
-		res[i++] = *buffer++;
-	res[i] = '\0';
-	return (res);
+	while (*s1)
+	{
+		str[i] = *s1++;
+		i++;
+	}
+	while (*s2)
+	{
+		str[i] = *s2++;
+		i++;
+	}
+	str[i] = 0;
+	return (str);
 }
 
 char	*ft_substr(char const *str, int start, int end)

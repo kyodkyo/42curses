@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:23:00 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/15 22:07:58 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/16 16:30:55 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,29 @@
 # include <fcntl.h>
 # include "./mlx/mlx.h"
 
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 42
+#endif
+
 typedef struct s_map {
+	char **board;
+	char **dfs_board;
+	int row;
+	int col;
+	int c_cnt;
+	int e_cnt;
+	int e_pos;
+	int p_cnt;
+	int p_pos;
 	char	**map;
 }	t_map;
 
 /** check_valid.c */
-int		check_input(int argc, char *argv);
+void	check_input(int argc, char *argv);
+
+/** etc.c */
+void	error_exit(void);
+void	free_arr(char **arr);
 
 /** ft_utils.c */
 void	*ft_bzero(void *map, size_t len);
@@ -40,5 +57,12 @@ int		update_buffer(int fd, ssize_t *read_size, char **prev);
 int		make_line(char **prev, char **line);
 void	free_all(char **prev, char **line);
 char	*get_next_line(int fd);
+
+/** setting_map.c */
+int		line_count(char *line);
+void	check_len(int len, t_map *map);
+int		check_total(int len, char *line, t_map *map);
+void	*make_map(int fd, t_map *map);
+void	initialize(t_map *map);
 
 #endif
