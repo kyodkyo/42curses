@@ -3,66 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   setting_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:02:08 by dakang            #+#    #+#             */
-/*   Updated: 2024/04/16 16:32:13 by dakang           ###   ########.fr       */
+/*   Updated: 2024/04/16 22:06:36 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	line_count(char *line)
+void    initialize(t_map *map)
 {
-	int	i;
-
-	if (!line)
-		return (0);
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '\n')
-			break ;
-		i++;
-	}
-	return (i);
-}
-
-void	check_len(int len, t_map *map)
-{
-	if (map->col == 0)
-		map->col = len;
-	if (map->col != len)
-		error_exit();
-}
-
-int	check_total(int len, char *line, t_map *map)
-{
-	int	i;
-
-	i = 0;
-	check_len(len, map);
-	while (i < len)
-	{
-		if (line[i] == 'C')
-			map->c_cnt++;
-		else if (line[i] == 'E')
-		{
-			map->e_cnt++;
-			map->e_pos = ((map->row - 1) * len) + i;
-		}
-		else if (line[i] == 'P')
-		{
-			map->p_cnt++;
-			map->p_pos = ((map->row - 1) * len) + i;
-		}
-		else if (line[i] == '0' || line[i] == '1')
-			continue ;
-		else
-			error_exit();
-		i++;
-	}
-	return (1);
+	// map 초기화
 }
 
 void	*make_map(int fd, t_map *map)
@@ -73,14 +25,14 @@ void	*make_map(int fd, t_map *map)
 
 	line = NULL;
 	total = NULL;
-	ft_bzero(&map, sizeof(t_map));
+	ft_bzero(&map, sizeof(t_map)); //수정 필요
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
 		len = line_count(line);
-		map->row++;
+		map->board_height++;
 		if (check_total(len, line, map) == 1)
 			total = ft_strjoin(line, total);
 		else
@@ -93,7 +45,29 @@ void	*make_map(int fd, t_map *map)
 	return (total);
 }
 
-void    initialize(t_map *map)
+void	set_image(t_map *map)
 {
-    // map 초기화
+	map->mlx_ptr = mlx_init();
+	map->win = mlx_new_window(map->mlx_ptr, \
+			map->board_width * 64, map->board_height * 64, "my_mlx");
+	image_to_board(map);
+}
+
+void	image_to_board(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map->board[i])
+	{
+		j = 0;
+		while (map->board[i][j])
+		{
+			// 캐릭터 확인해서 이미지 뿌리기
+			// 가장 바깥줄들 벽인지 확인하기
+			j++;
+		}
+		i++;
+	}
 }

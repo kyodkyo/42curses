@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:22:41 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/16 17:22:09 by dakang           ###   ########.fr       */
+/*   Updated: 2024/04/16 17:32:25 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int		fd;
 	t_map	*map;
