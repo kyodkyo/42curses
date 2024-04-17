@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 21:59:10 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/16 15:33:39 by dakang           ###   ########.fr       */
+/*   Created: 2024/04/17 21:00:28 by dakyo             #+#    #+#             */
+/*   Updated: 2024/04/17 21:00:50 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	*ft_bzero(void *map, size_t len)
+void    initialize(t_map *map)
 {
-	size_t	i;
-	char	*result;
-
-	i = 0;
-	result = (char *)map;
-	while (i < len)
-	{
-		result[i] = 0;
-		i++;
-	}
-	return (result);
+	// map 초기화
 }

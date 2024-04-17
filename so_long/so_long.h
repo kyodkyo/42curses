@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:23:00 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/16 21:52:04 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/17 21:05:09 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,31 @@
 # define KEY_D	2
 
 typedef struct s_map {
-	void	*mlx_ptr;
+	void	*mlx;
 	char	**board;
 	char	**dfs_board;
 	int		board_width;
 	int		board_height;
 	void	*win;
-	void	*character;
-	void	*obstacle;
-	void	*background;
-	void	*item;
-	void	*wall;
-	void	*exit_door;
-	int		image_width;
+	int		win_x;
+	int		win_y;
+	void	*racoon;
+	void	*tree;
+	void	*floor;
+	void	*seed;
+	void	*house;
+	int		img_width;
 	int		img_height;
 	int		c_cnt;
 	int		e_cnt;
 	int		e_pos;
 	int		p_cnt;
 	int		p_pos;
-	int		x;
-	int		y;
 	int		items;
 	int		item_flag;
 	int		exit_flag;
-	int		exit_locate[2];
+	int		exit_pos_x;
+	int		exit_pos_y;
 	int		move_cnt;
 }	t_map;
 
@@ -69,9 +69,6 @@ int		check_total(int len, char *line, t_map *map);
 /** etc.c */
 void	error_exit(void);
 void	free_arr(char **arr);
-
-/** ft_utils.c */
-void	*ft_bzero(void *map, size_t len);
 
 /** get_next_line_utils.c*/
 int		ft_strlen(char const *str);
@@ -87,8 +84,13 @@ void	free_all(char **prev, char **line);
 char	*get_next_line(int fd);
 
 /** setting_map.c */
-void	initialize(t_map *map);
 void	*make_map(int fd, t_map *map);
 void	set_image(t_map *map);
+void	image_to_board(t_map *map);
+void	put_image_to_window(t_map *map, int i, int j);
+void	check_wall(t_map *map);
+
+/** utils.c */
+void	initialize(t_map *map);
 
 #endif

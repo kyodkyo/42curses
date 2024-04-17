@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   put_image.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/14 16:22:41 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/17 19:38:28 by dakyo            ###   ########.fr       */
+/*   Created: 2024/04/17 20:44:48 by dakyo             #+#    #+#             */
+/*   Updated: 2024/04/17 21:04:10 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int argc, char **argv)
+void put_image_to_window_floor (t_map *map)
 {
-	int		fd;
-	t_map	*map;
+    mlx_put_image_to_window(map->mlx, map->win, map->floor, map->x, map->y);
+}
 
-	check_input(argc, argv[1]);
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		error_exit();
-	initialize(&map);
-	make_map(fd, &map);
-	if (map->p_cnt != 1 || map->c_cnt != 1 || map->e_cnt != 1)
-		error_exit();
-	set_image(&map);
-	return (0);
+void put_image_to_window_tree (t_map *map)
+{
+    
+}
+
+void put_image_to_window_seed (t_map *map)
+{
+    
+}
+
+void put_image_to_window_house (t_map *map)
+{
+    
+}
+
+void put_image_to_window_racoon (t_map *map)
+{
+    
 }

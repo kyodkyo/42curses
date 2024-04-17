@@ -6,16 +6,11 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:02:08 by dakang            #+#    #+#             */
-/*   Updated: 2024/04/16 22:06:36 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/17 21:05:53 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void    initialize(t_map *map)
-{
-	// map 초기화
-}
 
 void	*make_map(int fd, t_map *map)
 {
@@ -25,7 +20,6 @@ void	*make_map(int fd, t_map *map)
 
 	line = NULL;
 	total = NULL;
-	ft_bzero(&map, sizeof(t_map)); //수정 필요
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -47,9 +41,22 @@ void	*make_map(int fd, t_map *map)
 
 void	set_image(t_map *map)
 {
-	map->mlx_ptr = mlx_init();
-	map->win = mlx_new_window(map->mlx_ptr, \
+	map->mlx = mlx_init();
+	map->win = mlx_new_window(map->mlx, \
 			map->board_width * 64, map->board_height * 64, "my_mlx");
+	map->racoon = mlx_xpm_file_to_image(map->mlx, "./textures/racoon.xpm",
+			&map->img_width, &map->img_height);
+	map->tree = mlx_xpm_file_to_image(map->mlx, "./textures/tree.xpm",
+			&map->img_width, &map->img_height);
+	map->floor = mlx_xpm_file_to_image(map->mlx, "./textures/floor.xpm",
+			&map->img_width, &map->img_height);
+	map->seed = mlx_xpm_file_to_image(map->mlx, "./textures/seed.xpm",
+			&map->img_width, &map->img_height);
+	map->house = mlx_xpm_file_to_image(map->mlx, "./textures/house.xpm",
+			&map->img_width, &map->img_height);
+	if (!map->racoon || !map->tree || !map->floor
+		|| !map->seed || !map->house)
+		error_exit();
 	image_to_board(map);
 }
 
@@ -57,17 +64,64 @@ void	image_to_board(t_map *map)
 {
 	int	i;
 	int	j;
+	int	k;
 
 	i = 0;
+	map->win_y = 0;
 	while (map->board[i])
 	{
 		j = 0;
+		map->win_x = 0;
 		while (map->board[i][j])
 		{
-			// 캐릭터 확인해서 이미지 뿌리기
-			// 가장 바깥줄들 벽인지 확인하기
+			put_image_to_window(map, i, j);
+			check_wall(map);
 			j++;
+			map->win_x += 64;
 		}
 		i++;
+		map->win_y += 64;
+	}
+}
+
+void	put_image_to_window(t_map *map, int i, int j)
+{
+	if (map->board[i][j] == '0')
+		put_image_to_window_floor(map);
+	else if (map->board[i][j] == '1')
+		put_image_to_window_tree(map);
+	else if (map->board[i][j] == 'C')
+		put_image_to_window_seed(map);
+	else if (map->board[i][j] == 'E')
+	{
+		map->exit_pos_x = i;
+		map->exit_pos_y = j;
+		put_image_to_window_house(map);
+	}
+	else if (map->board[i][j] == 'P')
+		put_image_to_window_racoon(map);
+	else
+		error_exit();
+}
+
+void	check_wall(t_map *map)
+{
+	int	k;
+
+	k = 0;
+	while (k < map->board_width)
+	{
+		if (map->board[0][k] != '1'
+			|| (map->board[map->board_height - 1][k]) != '1')
+			error_exit();
+		k++;
+	}
+	k = 0;
+	while (k < map->board_height)
+	{
+		if (map->board[k][0] != '1'
+			|| (map->board[k][map->board_width - 1]) != '1')
+			error_exit();
+		k++;
 	}
 }

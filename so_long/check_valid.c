@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:33:18 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/16 21:44:02 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/17 20:57:19 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	check_input(int argc, char *argv)
 		error_exit();
 	while (argv[i])
 		i++;
-	if (argv[i - 4] != '.' || argv[i - 3] != 'b' 
+	if (argv[i - 4] != '.' || argv[i - 3] != 'b'
 		|| argv[i - 2] != 'e' || argv[i - 1] != 'r')
 		error_exit();
 }
