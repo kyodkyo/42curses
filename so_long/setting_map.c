@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:02:08 by dakang            #+#    #+#             */
-/*   Updated: 2024/04/17 21:05:53 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/19 19:58:32 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,30 @@
 
 void	*make_map(int fd, t_map *map)
 {
-	int		len;
 	char	*line;
 	char	*total;
+	char	*tmp;
 
-	line = NULL;
 	total = NULL;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		len = line_count(line);
 		map->board_height++;
-		if (check_total(len, line, map) == 1)
-			total = ft_strjoin(line, total);
-		else
-		{
-			free_arr(total);
-			break ;
-		}
+		tmp = total;
+		total = ft_strjoin(total, line);
+		if (tmp)
+			free(tmp);
+		if (!total)
+			free(total);
+		free(line);
+		line = NULL;
 	}
-	free(line);
-	return (total);
+	map->board = ft_split(total, '\n');
+	if (!map->board)
+		error_exit();
+	free(total);
 }
 
 void	set_image(t_map *map)
@@ -57,14 +58,12 @@ void	set_image(t_map *map)
 	if (!map->racoon || !map->tree || !map->floor
 		|| !map->seed || !map->house)
 		error_exit();
-	image_to_board(map);
 }
 
 void	image_to_board(t_map *map)
 {
 	int	i;
 	int	j;
-	int	k;
 
 	i = 0;
 	map->win_y = 0;
@@ -99,7 +98,7 @@ void	put_image_to_window(t_map *map, int i, int j)
 		put_image_to_window_house(map);
 	}
 	else if (map->board[i][j] == 'P')
-		put_image_to_window_racoon(map);
+		put_image_to_window_racoon(map, i, j);
 	else
 		error_exit();
 }

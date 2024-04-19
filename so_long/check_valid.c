@@ -6,13 +6,13 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:33:18 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/17 20:57:19 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/19 20:03:34 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	check_input(int argc, char *argv)
+int	check_input(int argc, char *argv)
 {
 	int	i;
 	int	fd;
@@ -25,57 +25,50 @@ void	check_input(int argc, char *argv)
 	if (argv[i - 4] != '.' || argv[i - 3] != 'b'
 		|| argv[i - 2] != 'e' || argv[i - 1] != 'r')
 		error_exit();
+	fd = open(argv, O_RDONLY);
+	if (fd < 0)
+		error_exit();
+	return (fd);
 }
 
-int	line_count(char *line)
+void	check_board(t_map *map)
 {
 	int	i;
+	int	j;
 
-	if (!line)
-		return (0);
 	i = 0;
-	while (line[i])
+	while (map->board[i])
 	{
-		if (line[i] == '\n')
-			break ;
+		j = 0;
+		while (map->board[i][j])
+		{
+			if (map->board[i][j] == 'C')
+				map->c_cnt++;
+			else if (map->board[i][j] == 'E')
+				map->e_cnt++;
+			else if (map->board[i][j] == 'P')
+				map->p_cnt++;
+			j++;
+		}
 		i++;
 	}
-	return (i);
-}
-
-void	check_len(int len, t_map *map)
-{
-	if (map->board_width == 0)
-		map->board_width = len;
-	if (map->board_width != len)
+	if (map->c_cnt != 1 || map->e_cnt != 1 || map->p_cnt != 1)
 		error_exit();
+	check_board_rec(map);
 }
 
-int	check_total(int len, char *line, t_map *map)
+void	check_board_rec(t_map *map)
 {
 	int	i;
 
 	i = 0;
-	check_len(len, map);
-	while (i < len)
+	map->board_width = ft_strlen(map->board[i]);
+	if (map->board_width == 0)
+		error_exit();
+	while (map->board[i])
 	{
-		if (line[i] == 'C')
-			map->c_cnt++;
-		else if (line[i] == 'E')
-		{
-			map->e_cnt++;
-			map->e_pos = ((map->board_height - 1) * len) + i;
-		}
-		else if (line[i] == 'P')
-		{
-			map->p_cnt++;
-			map->p_pos = ((map->board_height - 1) * len) + i;
-		}
-		else if (line[i] == '0' || line[i] == '1')
-			continue ;
-		else
+		if (map->board_width != ft_strlen(map->board[i]))
 			error_exit();
 		i++;
 	}
-	return (1);
 }

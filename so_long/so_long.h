@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:23:00 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/17 21:05:09 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/19 20:02:49 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,18 @@ typedef struct s_map {
 	void	*win;
 	int		win_x;
 	int		win_y;
+	int		img_width;
+	int		img_height;
+	int		now_x;
+	int		now_y;
 	void	*racoon;
 	void	*tree;
 	void	*floor;
 	void	*seed;
 	void	*house;
-	int		img_width;
-	int		img_height;
 	int		c_cnt;
 	int		e_cnt;
-	int		e_pos;
 	int		p_cnt;
-	int		p_pos;
 	int		items;
 	int		item_flag;
 	int		exit_flag;
@@ -61,14 +61,21 @@ typedef struct s_map {
 }	t_map;
 
 /** check_valid.c */
-void	check_input(int argc, char *argv);
-int		line_count(char *line);
-void	check_len(int len, t_map *map);
-int		check_total(int len, char *line, t_map *map);
+int	check_input(int argc, char *argv);
+void check_board(t_map *map);
+void check_board_rec(t_map *map);
 
-/** etc.c */
+/** setting_map.c */
+void	*make_map(int fd, t_map *map);
+void	set_image(t_map *map);
+void	image_to_board(t_map *map);
+void	put_image_to_window(t_map *map, int i, int j);
+void	check_wall(t_map *map);
+
+/** utils.c */
 void	error_exit(void);
-void	free_arr(char **arr);
+void	*initialize(void *arr, int value, size_t len);
+char	**ft_split(char const *s, char c);
 
 /** get_next_line_utils.c*/
 int		ft_strlen(char const *str);
@@ -82,15 +89,5 @@ int		update_buffer(int fd, ssize_t *read_size, char **prev);
 int		make_line(char **prev, char **line);
 void	free_all(char **prev, char **line);
 char	*get_next_line(int fd);
-
-/** setting_map.c */
-void	*make_map(int fd, t_map *map);
-void	set_image(t_map *map);
-void	image_to_board(t_map *map);
-void	put_image_to_window(t_map *map, int i, int j);
-void	check_wall(t_map *map);
-
-/** utils.c */
-void	initialize(t_map *map);
 
 #endif
