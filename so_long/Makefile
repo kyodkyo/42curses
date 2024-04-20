@@ -6,27 +6,27 @@
 #    By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/14 16:13:01 by dakyo             #+#    #+#              #
-#    Updated: 2024/04/19 18:05:41 by dakyo            ###   ########.fr        #
+#    Updated: 2024/04/20 13:02:49 by dakyo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = so_long
 INCLUDE = so_long.h
-SRCS = check_valid.c etc.c get_next_line_utils.c get_next_line.c \
+SRCS = check_valid.c get_next_line_utils.c get_next_line.c key_press.c \
 put_image.c setting_map.c so_long.c utils.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $^ -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@
+	$(CC) $(CFLAGS) $^ -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@
 
 %.o: %.c
 	make -C ./mlx
-	$(CC) -Imlx -c $< -o $@ -I $(INCLUDE)
+	$(CC) $(CFLAGS) -Imlx -c $< -o $@ -I $(INCLUDE)
 
 clean:
 	make -C ./mlx clean

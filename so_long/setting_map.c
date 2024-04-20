@@ -6,13 +6,13 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:02:08 by dakang            #+#    #+#             */
-/*   Updated: 2024/04/19 19:58:32 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/19 21:27:31 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	*make_map(int fd, t_map *map)
+void	make_map(int fd, t_map *map)
 {
 	char	*line;
 	char	*total;

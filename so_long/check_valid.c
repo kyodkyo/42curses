@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:33:18 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/19 20:03:34 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/19 21:36:14 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,48 @@ void	check_board_rec(t_map *map)
 			error_exit();
 		i++;
 	}
+}
+
+void	check_path(t_map *map)
+{
+	int	i;
+
+	i = -1;
+	map->dfs_board = malloc(sizeof(char *) * map->board_height + 1);
+	if (!map->dfs_board)
+		error_exit();
+	map->dfs_board[map->board_height] = NULL;
+	while (++i < map->board_height)
+	{
+		map->dfs_board[i] = ft_strdup(map->board[i]);
+		if (!map->dfs_board[i])
+			error_exit();
+	}
+	dfs(map, map->now_x, map->now_y);
+	if (map->exit_flag != 1 || map->item_flag != 1)
+	{
+		free(map->dfs_board);
+		error_exit();
+	}
+	i = -1;
+	while (map->dfs_board[++i])
+		free(map->dfs_board[i]);
+	free(map->dfs_board);
+}
+
+void	dfs(t_map *map, int y, int x)
+{
+	if (map->c_cnt == 0)
+		map->item_flag = 1;
+	if (map->dfs_board[y][x] == '1' || x < 0 || y < 0
+		|| x > map->board_width - 1 || map->board_height - 1 < y)
+		return ;
+	if (map->dfs_board[y][x] == 'C')
+		map->c_cnt--;
+	if (map->dfs_board[y][x] == 'E')
+		map->exit_flag = 1;
+	dfs(map, y - 1, x);
+	dfs(map, y + 1, x);
+	dfs(map, y, x - 1);
+	dfs(map, y, x + 1);
 }
