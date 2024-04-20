@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:02:08 by dakang            #+#    #+#             */
-/*   Updated: 2024/04/19 21:27:31 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/21 03:26:04 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	make_map(int fd, t_map *map)
 	char	*total;
 	char	*tmp;
 
-	total = NULL;
+	total = ft_strdup("");
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -36,7 +36,7 @@ void	make_map(int fd, t_map *map)
 	}
 	map->board = ft_split(total, '\n');
 	if (!map->board)
-		error_exit();
+		error_exit('j');
 	free(total);
 }
 
@@ -55,9 +55,11 @@ void	set_image(t_map *map)
 			&map->img_width, &map->img_height);
 	map->house = mlx_xpm_file_to_image(map->mlx, "./textures/house.xpm",
 			&map->img_width, &map->img_height);
+	map->house_open = mlx_xpm_file_to_image(map->mlx, "./textures/house_open.xpm",
+			&map->img_width, &map->img_height);
 	if (!map->racoon || !map->tree || !map->floor
 		|| !map->seed || !map->house)
-		error_exit();
+		error_exit('k');
 }
 
 void	image_to_board(t_map *map)
@@ -100,7 +102,7 @@ void	put_image_to_window(t_map *map, int i, int j)
 	else if (map->board[i][j] == 'P')
 		put_image_to_window_racoon(map, i, j);
 	else
-		error_exit();
+		error_exit('l');
 }
 
 void	check_wall(t_map *map)
@@ -112,7 +114,7 @@ void	check_wall(t_map *map)
 	{
 		if (map->board[0][k] != '1'
 			|| (map->board[map->board_height - 1][k]) != '1')
-			error_exit();
+			error_exit('m');
 		k++;
 	}
 	k = 0;
@@ -120,7 +122,7 @@ void	check_wall(t_map *map)
 	{
 		if (map->board[k][0] != '1'
 			|| (map->board[k][map->board_width - 1]) != '1')
-			error_exit();
+			error_exit('n');
 		k++;
 	}
 }
