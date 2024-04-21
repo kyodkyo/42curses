@@ -6,13 +6,13 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:02:08 by dakang            #+#    #+#             */
-/*   Updated: 2024/04/21 03:26:04 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/21 11:21:45 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	make_map(int fd, t_map *map)
+void	make_board(int fd, t_map *map)
 {
 	char	*line;
 	char	*total;
@@ -36,30 +36,9 @@ void	make_map(int fd, t_map *map)
 	}
 	map->board = ft_split(total, '\n');
 	if (!map->board)
-		error_exit('j');
+		error_exit();
 	free(total);
-}
-
-void	set_image(t_map *map)
-{
-	map->mlx = mlx_init();
-	map->win = mlx_new_window(map->mlx, \
-			map->board_width * 64, map->board_height * 64, "my_mlx");
-	map->racoon = mlx_xpm_file_to_image(map->mlx, "./textures/racoon.xpm",
-			&map->img_width, &map->img_height);
-	map->tree = mlx_xpm_file_to_image(map->mlx, "./textures/tree.xpm",
-			&map->img_width, &map->img_height);
-	map->floor = mlx_xpm_file_to_image(map->mlx, "./textures/floor.xpm",
-			&map->img_width, &map->img_height);
-	map->seed = mlx_xpm_file_to_image(map->mlx, "./textures/seed.xpm",
-			&map->img_width, &map->img_height);
-	map->house = mlx_xpm_file_to_image(map->mlx, "./textures/house.xpm",
-			&map->img_width, &map->img_height);
-	map->house_open = mlx_xpm_file_to_image(map->mlx, "./textures/house_open.xpm",
-			&map->img_width, &map->img_height);
-	if (!map->racoon || !map->tree || !map->floor
-		|| !map->seed || !map->house)
-		error_exit('k');
+	check_board(map);
 }
 
 void	image_to_board(t_map *map)
@@ -88,21 +67,35 @@ void	image_to_board(t_map *map)
 void	put_image_to_window(t_map *map, int i, int j)
 {
 	if (map->board[i][j] == '0')
-		put_image_to_window_floor(map);
+		put_image_to_board(map, map->floor, map->floor);
 	else if (map->board[i][j] == '1')
-		put_image_to_window_tree(map);
+		put_image_to_board(map, map->floor, map->tree);
 	else if (map->board[i][j] == 'C')
-		put_image_to_window_seed(map);
+		put_image_to_board(map, map->floor, map->seed);
 	else if (map->board[i][j] == 'E')
 	{
+		put_image_to_board(map, map->floor, map->house);
 		map->exit_pos_x = i;
 		map->exit_pos_y = j;
-		put_image_to_window_house(map);
 	}
 	else if (map->board[i][j] == 'P')
-		put_image_to_window_racoon(map, i, j);
+	{
+		put_image_to_board(map, map->floor, map->racoon);
+		map->now_x = j;
+		map->now_y = i;
+	}
 	else
-		error_exit('l');
+		error_exit();
+}
+
+void	put_image_to_board(t_map *board, void *img, void *img2)
+{
+	mlx_put_image_to_window(board->mlx, board->win, img,
+		board->win_x, board->win_y);
+	if (img2 == board->floor)
+		return ;
+	mlx_put_image_to_window(board->mlx, board->win, img2,
+		board->win_x, board->win_y);
 }
 
 void	check_wall(t_map *map)
@@ -114,7 +107,7 @@ void	check_wall(t_map *map)
 	{
 		if (map->board[0][k] != '1'
 			|| (map->board[map->board_height - 1][k]) != '1')
-			error_exit('m');
+			error_exit();
 		k++;
 	}
 	k = 0;
@@ -122,7 +115,7 @@ void	check_wall(t_map *map)
 	{
 		if (map->board[k][0] != '1'
 			|| (map->board[k][map->board_width - 1]) != '1')
-			error_exit('n');
+			error_exit();
 		k++;
 	}
 }

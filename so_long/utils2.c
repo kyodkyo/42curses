@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 01:16:48 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/21 01:24:37 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/21 11:21:50 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	cnt_word(const char *s, char c)
 
 	word = 0;
 	if (!s)
-		error_exit('o');
+		error_exit();
 	while (*s)
 	{
 		while (*s && *s == c)
