@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:02:08 by dakang            #+#    #+#             */
-/*   Updated: 2024/04/21 11:21:45 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/22 18:38:46 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	put_image_to_window(t_map *map, int i, int j)
 	}
 	else if (map->board[i][j] == 'P')
 	{
-		put_image_to_board(map, map->floor, map->racoon);
+		put_image_to_board(map, map->floor, map->duck);
 		map->now_x = j;
 		map->now_y = i;
 	}

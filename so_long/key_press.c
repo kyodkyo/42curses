@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 20:10:24 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/21 11:21:32 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/22 18:40:13 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ int	key_press(int code, t_map *map)
 	int	y;
 
 	if (code == KEY_W)
-		move_racoon(map, map->now_x, map->now_y - 1);
+		move_duck(map, map->now_x, map->now_y - 1);
 	else if (code == KEY_A)
-		move_racoon(map, map->now_x - 1, map->now_y);
+		move_duck(map, map->now_x - 1, map->now_y);
 	else if (code == KEY_S)
-		move_racoon(map, map->now_x, map->now_y + 1);
+		move_duck(map, map->now_x, map->now_y + 1);
 	else if (code == KEY_D)
-		move_racoon(map, map->now_x + 1, map->now_y);
+		move_duck(map, map->now_x + 1, map->now_y);
 	else if (code == KEY_ESC)
 		finish_game(map);
 	return (0);
 }
 
-void	move_racoon(t_map *map, int nx, int ny)
+void	move_duck(t_map *map, int nx, int ny)
 {
 	if (map->board[ny][nx] == '1')
 		return ;
@@ -51,7 +51,7 @@ void	move_racoon(t_map *map, int nx, int ny)
 		mlx_put_image_to_window(map->mlx, map->win, map->floor,
 			nx * 64, ny * 64);
 		if (map->items == 0)
-			mlx_put_image_to_window(map->mlx, map->win, map->house_open,
+			mlx_put_image_to_window(map->mlx, map->win, map->house,
 				map->exit_pos_y * 64, map->exit_pos_x * 64);
 	}
 	if (map->board[map->now_y][map->now_x] == 'E')
@@ -61,7 +61,7 @@ void	move_racoon(t_map *map, int nx, int ny)
 	write(1, "\n", 1);
 	map->now_x = nx;
 	map->now_y = ny;
-	mlx_put_image_to_window(map->mlx, map->win, map->racoon,
+	mlx_put_image_to_window(map->mlx, map->win, map->duck,
 		map->now_x * 64, map->now_y * 64);
 }
 
@@ -85,7 +85,7 @@ void	set_image(t_map *map)
 	map->mlx = mlx_init();
 	map->win = mlx_new_window(map->mlx, \
 			map->board_width * 64, map->board_height * 64, "my_mlx");
-	map->racoon = mlx_xpm_file_to_image(map->mlx, "./textures/racoon.xpm",
+	map->duck = mlx_xpm_file_to_image(map->mlx, "./textures/duck.xpm",
 			&map->img_width, &map->img_height);
 	map->tree = mlx_xpm_file_to_image(map->mlx, "./textures/tree.xpm",
 			&map->img_width, &map->img_height);
@@ -97,7 +97,7 @@ void	set_image(t_map *map)
 			&map->img_width, &map->img_height);
 	map->house_open = mlx_xpm_file_to_image(map->mlx,
 			"./textures/house_open.xpm", &map->img_width, &map->img_height);
-	if (!map->racoon || !map->tree || !map->floor
+	if (!map->duck || !map->tree || !map->floor
 		|| !map->seed || !map->house)
 		error_exit();
 	image_to_board(map);

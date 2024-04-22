@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:23:00 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/21 11:20:31 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/22 18:38:46 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_map {
 	int		img_height;
 	int		now_x;
 	int		now_y;
-	void	*racoon;
+	void	*duck;
 	void	*tree;
 	void	*floor;
 	void	*seed;
@@ -83,7 +83,7 @@ char	*get_next_line(int fd);
 /** key_press.c */
 void	error_exit();
 int		key_press(int code, t_map *map);
-void	move_racoon(t_map *map, int x, int y);
+void	move_duck(t_map *map, int x, int y);
 int		finish_game(t_map *map);
 void	set_image(t_map *map);
 
