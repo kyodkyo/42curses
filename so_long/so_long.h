@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:23:00 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/22 18:38:46 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/22 19:41:37 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	free_all(char **prev, char **line);
 char	*get_next_line(int fd);
 
 /** key_press.c */
-void	error_exit();
+void	error_exit(void);
 int		key_press(int code, t_map *map);
 void	move_duck(t_map *map, int x, int y);
 int		finish_game(t_map *map);
@@ -97,7 +97,7 @@ void	check_wall(t_map *map);
 /** utils.c */
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
-void	*initialize(void *arr, int value, size_t len);
+void	initialize(t_map *map);
 char	**make_visited(t_map *map);
 void	free_2d_array(int board_length, char **board);
 

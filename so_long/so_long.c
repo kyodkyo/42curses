@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:22:41 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/21 11:13:14 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/22 19:43:18 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 	t_map	map;
 
 	check_input(argc, argv[1], &fd);
-	initialize(&map, 0, sizeof(t_map));
+	initialize(&map);
 	make_board(fd, &map);
 	check_path(&map);
 	mlx_hook(map.win, KEY_PRESS, 0, &key_press, &map);

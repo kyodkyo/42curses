@@ -6,11 +6,11 @@
 #    By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/14 16:13:01 by dakyo             #+#    #+#              #
-#    Updated: 2024/04/21 11:00:16 by dakyo            ###   ########.fr        #
+#    Updated: 2024/04/22 19:13:01 by dakyo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc  -g -fsanitize=address #-Wall -Wextra -Werror
+CC = cc -Wall -Wextra -Werror
 
 NAME = so_long
 INCLUDE = so_long.h

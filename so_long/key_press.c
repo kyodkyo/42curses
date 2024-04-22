@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 20:10:24 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/22 18:40:13 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/22 19:12:18 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ void	error_exit(void)
 
 int	key_press(int code, t_map *map)
 {
-	int	x;
-	int	y;
-
 	if (code == KEY_W)
 		move_duck(map, map->now_x, map->now_y - 1);
 	else if (code == KEY_A)

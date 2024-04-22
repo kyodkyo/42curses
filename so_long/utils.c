@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 21:00:28 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/21 02:35:39 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/22 19:41:06 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,31 @@ void	ft_bzero(void *s, size_t n)
 		ptr[i] = 0;
 }
 
-void	*initialize(void *arr, int value, size_t len)
+void	initialize(t_map *map)
 {
-	size_t			i;
-	unsigned char	*temp;
-
-	temp = (unsigned char *)arr;
-	i = 0;
-	while (i < len)
-		temp[i++] = value;
-	return (temp);
+	map->board = NULL;
+	map->dfs_board = NULL;
+	map->board_width = 0;
+	map->board_height = 0;
+	map->img_width = 0;
+	map->img_height = 0;
+	map->now_x = 0;
+	map->now_y = 0;
+	map->duck = NULL;
+	map->tree = NULL;
+	map->floor = NULL;
+	map->seed = NULL;
+	map->house = NULL;
+	map->house_open = NULL;
+	map->c_cnt = 0;
+	map->e_cnt = 0;
+	map->p_cnt = 0;
+	map->items = 0;
+	map->item_flag = 0;
+	map->exit_flag = 0;
+	map->exit_pos_x = 0;
+	map->exit_pos_y = 0;
+	map->move_cnt = 0;
 }
 
 char	**make_visited(t_map *map)
