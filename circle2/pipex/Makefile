@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = pipex
 INCLUDE = pipex.h
-SRCS = pipex.c
+SRCS = etc.c ft_utils.c info.c pipex.c process.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
