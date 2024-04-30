@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 03:48:36 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/30 00:42:05 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/30 11:48:58 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <unistd.h>
 # include <fcntl.h>
-#include <stdlib.h>
+# include <stdlib.h>
 
 typedef struct s_cmd
 {

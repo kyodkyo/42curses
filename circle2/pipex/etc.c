@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 22:44:32 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/30 00:17:17 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/04/30 11:55:29 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void	free_all(t_info *info)
 		free_2d_array(info->cmds[i].arg);
 		i++;
 	}
+	free(info->cmds);
 	free_2d_array(info->path);
 }
