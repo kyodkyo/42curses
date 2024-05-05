@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 03:48:36 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/30 11:48:58 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/05/05 23:25:23 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	free_all(t_info *info);
 /** ft_utils.c */
 int		count_word(char const *s, char c);
 char	*save_word(const char *s, int n);
-char	**free_list(char **list);
+char	**free_arr(char **list);
 char	**ft_split(char const *s, char c);
 
 /** info.c */

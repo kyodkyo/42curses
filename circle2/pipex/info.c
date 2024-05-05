@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 23:38:01 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/30 00:42:24 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/05/05 23:23:11 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,14 @@ void	set_info(t_info *info, char **argv, char **envp)
 	while (ft_strncmp("PATH=", *envp, 5))
 		envp++;
 	info->path = ft_split(*envp + 5, ':');
-	i = 0;
 	info->cmds = (t_cmd *)malloc(sizeof(t_cmd) * 3);
+	i = 0;
 	while (i < 2)
 	{
 		info->cmds[i].arg = ft_split(argv[i + 2], ' ');
 		info->cmds[i].path = check_valid_access(*info->cmds[i].arg, info->path);
+		if (!info->cmds[i].arg || !info->cmds[i].path)
+			error_exit();
 		i++;
 	}
 	info->cmds[i].arg = 0;

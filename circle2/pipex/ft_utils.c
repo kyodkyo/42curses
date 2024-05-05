@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:03:50 by dakang            #+#    #+#             */
-/*   Updated: 2024/04/30 00:40:00 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/05/05 23:25:23 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*save_word(const char *s, int n)
 	return (res);
 }
 
-char	**free_list(char **list)
+char	**free_arr(char **list)
 {
 	int	i;
 
@@ -80,7 +80,7 @@ char	**ft_split(char const *s, char c)
 			j++;
 		res[i] = save_word(&s[temp], j - temp);
 		if (res[i++] == NULL)
-			return (free_list(res));
+			return (free_arr(res));
 	}
 	res[i] = NULL;
 	return (res);
