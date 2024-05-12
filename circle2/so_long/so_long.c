@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:22:41 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/22 19:43:18 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/05/12 13:21:54 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	make_board(fd, &map);
 	check_path(&map);
 	mlx_hook(map.win, KEY_PRESS, 0, &key_press, &map);
-	mlx_hook(map.win, 17, 0, &finish_game, &map);
+	mlx_hook(map.win, KEY_EXIT, 0, &finish_game, &map);
 	mlx_loop(map.mlx);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setting_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:02:08 by dakang            #+#    #+#             */
-/*   Updated: 2024/04/22 18:38:46 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/05/12 13:15:21 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	make_board(int fd, t_map *map)
 			break ;
 		map->board_height++;
 		tmp = total;
-		total = ft_strjoin(total, line);
 		if (tmp)
 			free(tmp);
+		total = ft_strjoin(total, line);
 		if (!total)
 			free(total);
 		free(line);

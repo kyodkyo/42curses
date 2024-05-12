@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:23:00 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/22 19:41:37 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/05/12 13:06:13 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,10 @@ char	**make_visited(t_map *map);
 void	free_2d_array(int board_length, char **board);
 
 /** utils2.c */
-char	**ft_split(char const *s, char c);
-void	*ft_split_free(char **ptr, int i);
-int		cnt_word(const char *s, char c);
-char	*ft_word_dup(const char *src, char c);
+void	*split_free(char **str, int i);
+int		count_word(char const *str, char c);
+char	*dup_word(char const *str, char c);
+char	**ft_split(char const *str, char c);
 void	ft_putnbr(int n);
 
 #endif
