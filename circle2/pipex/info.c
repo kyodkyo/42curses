@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 23:38:01 by dakyo             #+#    #+#             */
-/*   Updated: 2024/05/05 23:23:11 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/05/18 23:35:17 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@ char	*check_valid_access(char *cmd, char **path)
 
 	i = 0;
 	fd = access(cmd, X_OK);
-	if (fd == -1)
+	if (fd != -1)
 		return (cmd);
 	n_path = ft_strjoin("/", cmd);
 	while (path[i])
 	{
 		tmp = ft_strjoin(path[i], n_path);
 		fd = access(tmp, X_OK);
-		if (fd == -1)
+		if (fd != -1)
 		{
 			free(n_path);
 			return (tmp);
@@ -96,12 +96,14 @@ void	set_info(t_info *info, char **argv, char **envp)
 
 	info->infile = open(argv[1], O_RDONLY);
 	info->outfile = open(argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (info->infile == -1 || info->outfile == -1)
+	if (info->infile < 0 || info->outfile < 0)
 		error_exit();
-	while (ft_strncmp("PATH=", *envp, 5))
+	while (ft_strncmp("PATH", *envp, 4))
 		envp++;
 	info->path = ft_split(*envp + 5, ':');
 	info->cmds = (t_cmd *)malloc(sizeof(t_cmd) * 3);
+	if (!info->cmds)
+		error_exit();
 	i = 0;
 	while (i < 2)
 	{

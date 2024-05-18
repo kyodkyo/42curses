@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 16:34:11 by dakyo             #+#    #+#             */
-/*   Updated: 2024/05/05 23:43:34 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/05/18 23:36:27 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ char	*check_valid_access(char *cmd, char **path)
 
 	i = 0;
 	fd = access(cmd, X_OK);
-	if (fd == -1)
+	if (fd != -1)
 		return (cmd);
 	n_path = ft_strjoin("/", cmd);
 	while (path[i])
 	{
 		tmp = ft_strjoin(path[i], n_path);
 		fd = access(tmp, X_OK);
-		if (fd == -1)
+		if (fd != -1)
 		{
 			free(n_path);
 			return (tmp);
