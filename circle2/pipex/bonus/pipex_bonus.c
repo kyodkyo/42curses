@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:06:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/05/06 00:07:22 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/05/19 17:35:42 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd	cmd;
 	t_info	info;
 
-	if (argc < 6)
+	if (argc < 5)
 		error_exit();
 	set_info(&info, argc, argv, envp);
 	i = 0;
@@ -29,5 +29,5 @@ int	main(int argc, char **argv, char **envp)
 	}
 	while (wait(0) != -1)
 		;
-	free_info(&info);
+	free_info(&info, argc);
 }

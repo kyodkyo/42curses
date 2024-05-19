@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 23:49:38 by dakyo             #+#    #+#             */
-/*   Updated: 2024/05/06 00:05:52 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/05/19 17:04:08 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	middle_process(int *fd)
 
 void	parent_process(t_info *info, int *fd)
 {
-	close(fd[1]);
 	dup2(fd[0], STDIN_FILENO);
+	close(fd[1]);
 	close(fd[0]);
 }
 

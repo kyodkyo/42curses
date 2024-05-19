@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:07:50 by dakyo             #+#    #+#             */
-/*   Updated: 2024/05/06 00:07:54 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/05/19 17:36:02 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_info
 /** etc_bonus.c */
 void	error_exit(void);
 void	free_2d_arr(char **arr);
-void	free_info(t_info *info);
+void	free_info(t_info *info, int argc);
 
 /** ft_utils_bonus.c */
 int		count_word(char const *s, char c);

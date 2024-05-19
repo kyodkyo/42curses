@@ -6,12 +6,12 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 03:48:12 by dakyo             #+#    #+#             */
-/*   Updated: 2024/05/18 23:36:04 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/05/19 17:43:15 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <stdio.h>
+
 int	main(int argc, char **argv, char **envp)
 {
 	int		i;
