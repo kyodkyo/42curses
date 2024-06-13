@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:07:50 by dakyo             #+#    #+#             */
-/*   Updated: 2024/05/19 17:36:02 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/13 22:11:24 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,19 @@ typedef struct s_info
 	int		infile;
 	int		outfile;
 	int		heredoc;
+	int		fd[2];
 	char	**path;
 	t_cmd	*cmds;
+	pid_t	pid;
 }	t_info;
 
 /** etc_bonus.c */
-void	error_exit(void);
+void	error_exit(char *str);
 void	free_2d_arr(char **arr);
 void	free_info(t_info *info, int argc);
 
 /** ft_utils_bonus.c */
+int		ft_strncmp_gnl(const char *s1, const char *s2, int n);
 int		count_word(char const *s, char c);
 char	*save_word(const char *s, int n);
 char	**free_arr(char **list);
@@ -72,6 +75,7 @@ void	infile_process(t_info *info, int *fd);
 void	outfile_process(t_info *info, int *fd);
 void	middle_process(int *fd);
 void	parent_process(t_info *info, int *fd);
-void	pipe_process(t_info *info, int i, int n);
+void	wait_process(void);
+void	execute_pipex(t_cmd *cmd, t_info *info, int argc, char **envp);
 
 #endif

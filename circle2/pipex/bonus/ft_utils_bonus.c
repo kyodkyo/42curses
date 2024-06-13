@@ -6,11 +6,29 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:50:11 by dakyo             #+#    #+#             */
-/*   Updated: 2024/05/05 23:25:23 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/13 22:34:11 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
+
+int	ft_strncmp_gnl(const char *s1, const char *s2, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n && (s1[i] || s2[i]))
+	{
+		if (s1[i] != s2[i])
+		{
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		}
+		i++;
+	}
+	if (s1[i] != '\n')
+		return (1);
+	return (0);
+}
 
 int	count_word(char const *s, char c)
 {

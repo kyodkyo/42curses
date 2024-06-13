@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 23:49:38 by dakyo             #+#    #+#             */
-/*   Updated: 2024/05/19 17:04:08 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/13 22:10:29 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,31 @@ void	parent_process(t_info *info, int *fd)
 	close(fd[0]);
 }
 
-void	pipe_process(t_info *info, int i, int n)
+void	execute_pipex(t_cmd *cmd, t_info *info, int argc, char **envp)
 {
-	int		fd[2];
-	pid_t	pid;
+	int	i;
 
-	if (pipe(fd) < 0)
-		error_exit();
-	pid = fork();
-	if (pid == -1)
-		error_exit();
-	else if (pid == 0)
+	i = -1;
+	while (++i < argc - 3 - info->heredoc)
 	{
-		if (i == 0)
-			infile_process(info, fd);
-		else if (i == n - 4 - info->heredoc)
-			outfile_process(info, fd);
+		if (pipe(info->fd) < 0)
+			error_exit("pipe error\n");
+		info->pid = fork();
+		if (info->pid == -1)
+			error_exit("fork error\n");
+		else if (info->pid == 0)
+		{
+			if (i == 0)
+				infile_process(info, info->fd);
+			else if (i == argc - 4 - info->heredoc)
+				outfile_process(info, info->fd);
+			else
+				middle_process(info->fd);
+			execve(check_valid_access(*info->cmds[i].arg, info->path),
+				info->cmds[i].arg, envp);
+		}
 		else
-			middle_process(fd);
-		if (execve(info->cmds[i].path, info->cmds[i].arg, NULL) < 0)
-			error_exit();
+			parent_process(info, info->fd);
 	}
-	else
-		parent_process(info, fd);
+	wait_process();
 }

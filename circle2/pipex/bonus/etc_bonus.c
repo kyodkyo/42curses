@@ -6,15 +6,16 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 16:32:19 by dakyo             #+#    #+#             */
-/*   Updated: 2024/05/19 17:35:04 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/13 21:00:26 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	error_exit(void)
+void	error_exit(char *str)
 {
-	write(1, "Error\n", 2);
+	write(2, str, ft_strlen(str));
+	unlink("/tmp/.infile");
 	exit(1);
 }
 
