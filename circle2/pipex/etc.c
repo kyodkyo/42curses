@@ -6,15 +6,15 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 22:44:32 by dakyo             #+#    #+#             */
-/*   Updated: 2024/05/19 17:42:20 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/13 19:12:14 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	error_exit(void)
+void	error_exit(char *str)
 {
-	write(1, "Error\n", 6);
+	write(2, str, ft_strlen(str));
 	exit(1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 23:23:16 by dakyo             #+#    #+#             */
-/*   Updated: 2024/04/30 00:30:46 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/13 21:47:28 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,30 @@ void	parent_process(t_info *info, int *fd)
 	close(fd[0]);
 }
 
-void	pipe_process(t_info *info, int i)
+void	execute_pipex(t_cmd *cmd, t_info *info, char **envp, int i)
 {
 	int		fd[2];
 	pid_t	pid;
 
-	if (pipe(fd) < 0)
-		error_exit();
-	pid = fork();
-	if (pid == -1)
-		error_exit();
-	else if (pid == 0)
+	while (++i < 2)
 	{
-		if (i == 0)
-			infile_process(info, fd);
+		if (pipe(fd) < 0)
+			error_exit("pipe error\n");
+		pid = fork();
+		if (pid == -1)
+			error_exit("fork error\n");
+		else if (pid == 0)
+		{
+			if (i == 0)
+				infile_process(info, fd);
+			else
+				outfile_process(info, fd);
+			execve(check_valid_access(*info->cmds[i].arg, info->path),
+				info->cmds[i].arg, envp);
+		}
 		else
-			outfile_process(info, fd);
-		if (execve(info->cmds[i].path, info->cmds[i].arg, NULL) < 0)
-			error_exit();
+			parent_process(info, fd);
 	}
-	else
-		parent_process(info, fd);
+	waitpid(-1, NULL, 0);
+	waitpid(-1, NULL, 0);
 }

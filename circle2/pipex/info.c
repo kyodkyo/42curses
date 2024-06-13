@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 23:38:01 by dakyo             #+#    #+#             */
-/*   Updated: 2024/05/18 23:35:17 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/13 21:28:18 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ char	*check_valid_access(char *cmd, char **path)
 	char	*n_path;
 
 	i = 0;
-	fd = access(cmd, X_OK);
-	if (fd != -1)
+	if (!access(cmd, X_OK))
 		return (cmd);
 	n_path = ft_strjoin("/", cmd);
 	while (path[i])
@@ -82,11 +81,11 @@ char	*check_valid_access(char *cmd, char **path)
 			free(n_path);
 			return (tmp);
 		}
-		close(fd);
 		free(tmp);
 		i++;
 	}
 	free(n_path);
+	error_exit("cmd error\n");
 	return (NULL);
 }
 
@@ -96,22 +95,22 @@ void	set_info(t_info *info, char **argv, char **envp)
 
 	info->infile = open(argv[1], O_RDONLY);
 	info->outfile = open(argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (info->infile < 0 || info->outfile < 0)
-		error_exit();
+	if (info->infile < 0)
+		error_exit("no such file or directory\n");
+	if (info->outfile < 0)
+		error_exit("outfile error\n");
 	while (ft_strncmp("PATH", *envp, 4))
 		envp++;
 	info->path = ft_split(*envp + 5, ':');
 	info->cmds = (t_cmd *)malloc(sizeof(t_cmd) * 3);
 	if (!info->cmds)
-		error_exit();
-	i = 0;
-	while (i < 2)
+		error_exit("malloc error\n");
+	i = -1;
+	while (++i < 2)
 	{
 		info->cmds[i].arg = ft_split(argv[i + 2], ' ');
-		info->cmds[i].path = check_valid_access(*info->cmds[i].arg, info->path);
-		if (!info->cmds[i].arg || !info->cmds[i].path)
-			error_exit();
-		i++;
+		if (!info->cmds[i].arg)
+			error_exit("split error\n");
 	}
 	info->cmds[i].arg = 0;
 }

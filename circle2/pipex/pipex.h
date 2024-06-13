@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 03:48:36 by dakyo             #+#    #+#             */
-/*   Updated: 2024/05/05 23:25:23 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/13 21:31:45 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_info
 }	t_info;
 
 /** etc.c */
-void	error_exit(void);
+void	error_exit(char *str);
 void	free_2d_array(char **arr);
 void	free_all(t_info *info);
 
@@ -53,6 +53,6 @@ void	set_info(t_info *info, char **argv, char **envp);
 void	infile_process(t_info *info, int *fd);
 void	outfile_process(t_info *info, int *fd);
 void	parent_process(t_info *info, int *fd);
-void	pipe_process(t_info *info, int i);
+void	execute_pipex(t_cmd *cmd, t_info *info, char **envp, int i);
 
 #endif
