@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 23:38:01 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/13 21:28:18 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/14 16:05:55 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ void	set_info(t_info *info, char **argv, char **envp)
 	int	i;
 
 	info->infile = open(argv[1], O_RDONLY);
-	info->outfile = open(argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (info->infile < 0)
-		error_exit("no such file or directory\n");
+		error_exit("no file error\n");
+	info->outfile = open(argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (info->outfile < 0)
 		error_exit("outfile error\n");
 	while (ft_strncmp("PATH", *envp, 4))

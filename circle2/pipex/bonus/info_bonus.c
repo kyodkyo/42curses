@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 16:34:11 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/13 22:23:29 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/14 16:08:30 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ void	set_info2(t_info *info, int argc, char **argv)
 
 void	set_info(t_info *info, int argc, char **argv, char **envp)
 {
-	int	i;
-
 	if (!ft_strncmp(argv[1], "here_doc", 8))
 	{
 		info->heredoc = 1;

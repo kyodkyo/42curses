@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:07:50 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/13 22:11:24 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/14 16:09:27 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	set_info(t_info *info, int argc, char **argv, char **envp);
 void	infile_process(t_info *info, int *fd);
 void	outfile_process(t_info *info, int *fd);
 void	middle_process(int *fd);
-void	parent_process(t_info *info, int *fd);
+void	parent_process(int *fd);
 void	wait_process(void);
-void	execute_pipex(t_cmd *cmd, t_info *info, int argc, char **envp);
+void	execute_pipex(t_info *info, int argc, char **envp);
 
 #endif

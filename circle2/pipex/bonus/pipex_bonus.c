@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 15:06:26 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/13 22:09:38 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/14 16:17:28 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ void	wait_process(void)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_cmd	cmd;
 	t_info	info;
 
 	if (argc < 5)
 		error_exit("argc error\n");
 	set_info(&info, argc, argv, envp);
-	execute_pipex(&cmd, &info, argc, envp);
+	execute_pipex(&info, argc, envp);
 	free_info(&info, argc);
 	unlink("/tmp/.infile");
 }

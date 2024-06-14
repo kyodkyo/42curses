@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 23:23:16 by dakyo             #+#    #+#             */
-/*   Updated: 2024/06/13 21:47:28 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/06/14 16:07:04 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	infile_process(t_info *info, int *fd)
 {
+	if (info->infile < 0)
+		error_exit("no such file or directory\n");
 	close(fd[0]);
 	dup2(info->infile, STDIN_FILENO);
 	dup2(fd[1], STDOUT_FILENO);
@@ -28,14 +30,14 @@ void	outfile_process(t_info *info, int *fd)
 	close(info->outfile);
 }
 
-void	parent_process(t_info *info, int *fd)
+void	parent_process(int *fd)
 {
 	close(fd[1]);
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[0]);
 }
 
-void	execute_pipex(t_cmd *cmd, t_info *info, char **envp, int i)
+void	execute_pipex(t_info *info, char **envp, int i)
 {
 	int		fd[2];
 	pid_t	pid;
@@ -57,7 +59,7 @@ void	execute_pipex(t_cmd *cmd, t_info *info, char **envp, int i)
 				info->cmds[i].arg, envp);
 		}
 		else
-			parent_process(info, fd);
+			parent_process(fd);
 	}
 	waitpid(-1, NULL, 0);
 	waitpid(-1, NULL, 0);
