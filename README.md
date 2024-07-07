@@ -11,3 +11,7 @@
 ### circle 2
     push_swap
     so_long
+    pipex
+
+### circle 3
+    minishell
