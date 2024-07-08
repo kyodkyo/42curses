@@ -6,7 +6,7 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:25:11 by dakyo             #+#    #+#             */
-/*   Updated: 2024/07/07 22:29:02 by dakang           ###   ########.fr       */
+/*   Updated: 2024/07/08 16:56:37 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
 # include <pthread.h>
 # include <sys/time.h>
 
@@ -42,15 +44,14 @@ typedef struct philo{
 	t_info			*info;
 }	t_philo;
 
-/** init.c */
+int			run_philo(t_info *info, t_philo *philo);
+
 int			init_info(int argc, char **argv, t_info *info);
 int			init_philo(t_info *info, t_philo **philo);
 
-/** utils.c */
-int			error(char *message);
+int			error(char *str);
 long long	get_time(void);
-
-/** ft_utils.c */
-int			ft_atoi(const char *str);
+int			action_print(t_info *info, int id, char *str);
+void		pass_time(long long wait_time, t_info *info);
 
 #endif

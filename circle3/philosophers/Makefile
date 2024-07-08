@@ -7,7 +7,7 @@ NAME_BONUS = philo_bonus
 INCLUDE = philo.h
 BONUS_DIR = ./bonus/
 
-SRCS = philo.c
+SRCS = execute.c philo_init.c philo.c utils.c
 SRCS_BONUS = $(BONUS_DIR)philo.c 
 
 OBJS = $(SRCS:.c=.o)

@@ -6,35 +6,50 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 21:43:58 by dakang            #+#    #+#             */
-/*   Updated: 2024/07/07 23:00:05 by dakang           ###   ########.fr       */
+/*   Updated: 2024/07/08 16:55:06 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	action_print(t_info *info, int id, char *message)
-{
-	long long cur_time;
-
-	pthread_mutex_lock(&(info->print_locks));
-	cur_time = get_time();
-	if (cur_time == -1)
-		return (1);
-	if (!(info->finish))
-		printf("%lld %d %s\n", cur_time - info->start_time, id + 1, message);
-	if (ft_strncmp(message, "died", 4) == 0)
-		return (0);
-	pthread_mutex_unlock(&(info->print_locks));
-	return (0);
-}
-
 void	philo_action(t_info *info, t_philo *philo)
 {
 	pthread_mutex_lock(&(info->forks[philo->left]));
 	action_print(info, philo->id, "has taken a fork");
+	if (info->num_of_philo != 1)
+	{
+		pthread_mutex_lock(&(info->forks[philo->right]));
+		action_print(info, philo->id, "has taken a fork");
+		action_print(info, philo->id, "is eating");
+		pthread_mutex_lock(&(info->time));
+		philo->last_eat_time = get_time();
+		pthread_mutex_unlock(&(info->time));
+		philo->eat_count = philo->eat_count + 1;
+		pass_time((long long)info->time_to_eat, info);
+		pthread_mutex_unlock(&(info->forks[philo->right]));
+	}
+	pthread_mutex_unlock(&(info->forks[philo->left]));
 }
 
-void	thread_routine(void *argv)
+void	sleep_even_philo(t_info *info)
+{
+	int				diff;
+	struct timeval	cur_time;
+	struct timeval	time;
+
+	gettimeofday(&cur_time, NULL);
+	while (1)
+	{
+		gettimeofday(&time, NULL);
+		diff = time.tv_usec - cur_time.tv_usec
+			+ (time.tv_sec - cur_time.tv_sec) * 1000000;
+		if (diff > info->time_to_eat * 900)
+			break ;
+		usleep(info->time_to_eat);
+	}
+}
+
+void	*thread_routine(void *argv)
 {
 	t_info	*info;
 	t_philo	*philo;
@@ -45,13 +60,50 @@ void	thread_routine(void *argv)
 		sleep_even_philo(info);
 	while (!info->finish)
 	{
+		if (info->num_of_philo - 1 == philo->id && philo->eat_count == 0)
+			usleep(1);
 		philo_action(info, philo);
+		if (info->num_of_philo == 1)
+			pass_time((long long)info->time_to_sleep, info);
+		if (info->number_of_must_eat == philo->eat_count)
+		{
+			info->finished_eat++;
+			break ;
+		}
+		action_print(info, philo->id, "is sleeping");
+		pass_time((long long)info->time_to_sleep, info);
+		action_print(info, philo->id, "is thinking");
 	}
+	return (0);
 }
 
-void check_philo_finish()
+void	check_philo_finish(t_info *info, t_philo *philo)
 {
-	
+	int			i;
+	long long	cur;
+
+	while (!info->finish)
+	{
+		if ((info->number_of_must_eat != 0)
+			&& (info->num_of_philo == info->finished_eat))
+		{
+			info->finish = 1;
+			break ;
+		}
+		i = 0;
+		while (i < info->num_of_philo)
+		{
+			cur = get_time();
+			if ((cur - philo[i].last_eat_time) >= info->time_to_die)
+			{
+				action_print(info, i, "died");
+				info->finish = 1;
+				pthread_mutex_unlock(&(info->print_locks));
+				break ;
+			}
+			i++;
+		}
+	}
 }
 
 int	run_philo(t_info *info, t_philo *philo)
