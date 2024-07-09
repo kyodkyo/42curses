@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 14:56:17 by dakang            #+#    #+#             */
-/*   Updated: 2024/07/08 16:42:33 by dakang           ###   ########.fr       */
+/*   Updated: 2024/07/09 19:57:35 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	init_info_mutex(t_info *info)
 			return (1);
 		i++;
 	}
-	if (pthread_mutex_init(&(info->print_locks), NULL))
+	if (pthread_mutex_init(&(info->print_lock), NULL))
 		return (1);
-	if (pthread_mutex_init(&(info->time), NULL))
+	if (pthread_mutex_init(&(info->time_lock), NULL))
 		return (1);
 	return (0);
 }
@@ -67,7 +67,7 @@ int	init_info(int argc, char **argv, t_info *info)
 	if (info->num_of_philo <= 0 || info->time_to_die <= 0
 		|| info->time_to_eat <= 0 || info->time_to_sleep <= 0)
 		return (1);
-	info->start_time = get_time();
+	info->start_time = get_cur_time();
 	if (argc == 6)
 	{
 		info->number_of_must_eat = ft_atoi(argv[5]);
@@ -96,7 +96,7 @@ int	init_philo(t_info *info, t_philo **philo)
 		(*philo)[i].left = i;
 		(*philo)[i].right = (i + 1) % info->num_of_philo;
 		(*philo)[i].eat_count = 0;
-		(*philo)[i].last_eat_time = get_time();
+		(*philo)[i].last_eat_time = get_cur_time();
 		i++;
 	}
 	return (0);

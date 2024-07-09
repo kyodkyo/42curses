@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:25:11 by dakyo             #+#    #+#             */
-/*   Updated: 2024/07/08 16:56:37 by dakang           ###   ########.fr       */
+/*   Updated: 2024/07/09 19:57:35 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ typedef struct info{
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_must_eat;
-	int				finish;
-	int				finished_eat;
+	int				finish_flag;
+	int				finished_eat_philo;
 	long long		start_time;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	print_locks;
-	pthread_mutex_t	time;
+	pthread_mutex_t	print_lock;
+	pthread_mutex_t	time_lock;
 }	t_info;
 
 typedef struct philo{
@@ -50,7 +50,7 @@ int			init_info(int argc, char **argv, t_info *info);
 int			init_philo(t_info *info, t_philo **philo);
 
 int			error(char *str);
-long long	get_time(void);
+long long	get_cur_time(void);
 int			action_print(t_info *info, int id, char *str);
 void		pass_time(long long wait_time, t_info *info);
 
