@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 14:56:17 by dakang            #+#    #+#             */
-/*   Updated: 2024/07/09 19:57:35 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/07/10 22:27:53 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,18 @@ int	init_info_mutex(t_info *info)
 		return (1);
 	if (pthread_mutex_init(&(info->time_lock), NULL))
 		return (1);
+	if (pthread_mutex_init(&(info->flag_lock), NULL))
+		return (1);
 	return (0);
+}
+
+long long	get_cur_time(void)
+{
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL) == -1)
+		return (-1);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 int	init_info(int argc, char **argv, t_info *info)

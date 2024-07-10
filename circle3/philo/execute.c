@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 21:43:58 by dakang            #+#    #+#             */
-/*   Updated: 2024/07/09 19:57:35 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/07/10 22:32:16 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,17 @@ void	*thread_routine(void *argv)
 
 	philo = (t_philo *)argv;
 	info = philo->info;
-	if (philo->id % 2 == 0)
+	if (philo->id % 2 == 1)
 		sleep_even_philo(info);
-	while (!info->finish_flag)
+	while (!get_set_finish_flag(info, 0))
 	{
 		if (info->num_of_philo - 1 == philo->id && philo->eat_count == 0)
 			usleep(1);
 		philo_eating(info, philo);
 		if (info->num_of_philo == 1)
-			pass_time((long long)info->time_to_sleep, info);
+			pass_time((long long)info->time_to_die, info);
 		if (info->number_of_must_eat == philo->eat_count)
-		{
 			info->finished_eat_philo++;
-			break ;
-		}
 		action_print(info, philo->id, "is sleeping");
 		pass_time((long long)info->time_to_sleep, info);
 		action_print(info, philo->id, "is thinking");
@@ -81,27 +78,27 @@ void	check_philo_finish_or_dead(t_info *info, t_philo *philo)
 {
 	int			i;
 	long long	cur;
+	long long	last_time;
 
-	while (!info->finish_flag)
+	while (!get_set_finish_flag(info, 0))
 	{
 		if ((info->number_of_must_eat != 0)
 			&& (info->num_of_philo == info->finished_eat_philo))
-		{
-			info->finish_flag = 1;
-			break ;
-		}
-		i = 0;
-		while (i < info->num_of_philo)
+			get_set_finish_flag(info, 1);
+		i = -1;
+		while (++i < info->num_of_philo)
 		{
 			cur = get_cur_time();
-			if ((cur - philo[i].last_eat_time) >= info->time_to_die)
+			pthread_mutex_lock(&(info->time_lock));
+			last_time = philo[i].last_eat_time;
+			pthread_mutex_unlock(&(info->time_lock));
+			if ((cur - last_time) >= info->time_to_die)
 			{
 				action_print(info, i, "died");
-				info->finish_flag = 1;
+				get_set_finish_flag(info, 1);
 				pthread_mutex_unlock(&(info->print_lock));
 				break ;
 			}
-			i++;
 		}
 	}
 }

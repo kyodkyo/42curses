@@ -6,7 +6,7 @@
 /*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 14:53:29 by dakang            #+#    #+#             */
-/*   Updated: 2024/07/09 19:57:35 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/07/10 22:31:57 by dakyo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,6 @@ int	error(char *str)
 {
 	printf("%s\n", str);
 	return (1);
-}
-
-long long	get_cur_time(void)
-{
-	struct timeval	time;
-
-	if (gettimeofday(&time, NULL) == -1)
-		return (-1);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
@@ -55,12 +46,32 @@ int	action_print(t_info *info, int id, char *str)
 	cur_time = get_cur_time();
 	if (cur_time == -1)
 		return (1);
-	if (!(info->finish_flag))
+	if (!get_set_finish_flag(info, 0))
 		printf("%lld %d %s\n", cur_time - info->start_time, id + 1, str);
 	if (ft_strncmp(str, "died", 4) == 0)
 		return (0);
 	pthread_mutex_unlock(&(info->print_lock));
 	return (0);
+}
+
+int	get_set_finish_flag(t_info *info, int n)
+{
+	int	result;
+
+	result = 0;
+	if (n == 0)
+	{
+		pthread_mutex_lock(&(info->flag_lock));
+		result = info->finish_flag;
+		pthread_mutex_unlock(&(info->flag_lock));
+	}
+	else if (n == 1)
+	{
+		pthread_mutex_lock(&(info->flag_lock));
+		info->finish_flag = 1;
+		pthread_mutex_unlock(&(info->flag_lock));
+	}
+	return (result);
 }
 
 void	pass_time(long long wait_time, t_info *info)
@@ -69,7 +80,7 @@ void	pass_time(long long wait_time, t_info *info)
 	long long	now;
 
 	start = get_cur_time();
-	while (!(info->finish_flag))
+	while (!get_set_finish_flag(info, 0))
 	{
 		now = get_cur_time();
 		if ((now - start) >= wait_time)
