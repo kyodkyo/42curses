@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:25:11 by dakyo             #+#    #+#             */
-/*   Updated: 2024/07/10 22:33:19 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/07/12 15:59:54 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-typedef struct info{
+typedef struct s_info{
 	int				num_of_philo;
 	int				time_to_die;
 	int				time_to_eat;
@@ -35,7 +35,7 @@ typedef struct info{
 	pthread_mutex_t	flag_lock;
 }	t_info;
 
-typedef struct philo{
+typedef struct s_philo{
 	int				id;
 	int				left;
 	int				right;
