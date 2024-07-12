@@ -6,7 +6,7 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:36:21 by dakang            #+#    #+#             */
-/*   Updated: 2024/07/12 16:24:08 by dakang           ###   ########.fr       */
+/*   Updated: 2024/07/12 19:32:27 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	main(int argc, char **argv)
 {
-	t_info	*info;
+	t_info	info;
 
 	if (argc != 5 && argc != 6)
 		return (error("argc error"));
-	memset(info, 0, sizeof(t_info));
+	memset(&info, 0, sizeof(t_info));
 	if (init_info(argc, argv, &info))
 		return (error("init info error"));
 	if (init_philo(&info))

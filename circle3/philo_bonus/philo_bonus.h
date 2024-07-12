@@ -6,7 +6,7 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:36:58 by dakang            #+#    #+#             */
-/*   Updated: 2024/07/12 17:34:18 by dakang           ###   ########.fr       */
+/*   Updated: 2024/07/12 19:31:27 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <pthread.h>
 # include <semaphore.h>
 # include <sys/time.h>
+# include <signal.h>
 
 typedef struct s_philo{
 	struct s_info	*info;
@@ -47,6 +48,7 @@ typedef struct s_info{
 }	t_info;
 
 int			error(char *str);
+int			get_set_finish_flag(t_info *info, int n);
 
 long long	get_cur_time(void);
 int			init_info(int argc, char **argv, t_info *info);

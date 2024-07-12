@@ -6,30 +6,25 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:58:28 by dakang            #+#    #+#             */
-/*   Updated: 2024/07/12 17:37:24 by dakang           ###   ########.fr       */
+/*   Updated: 2024/07/12 19:30:21 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int	get_set_finish_flag(t_info *info, int n)
+void	pass_time(long long wait_time, t_info *info)
 {
-	int	result;
+	long long	start;
+	long long	now;
 
-	result = 0;
-	if (n == 0)
+	start = get_cur_time();
+	while (!get_set_finish_flag(info, 0))
 	{
-		sem_wait(info->flag_lock);
-		result = info->finish_flag;
-		sem_post(&(info->flag_lock));
+		now = get_cur_time();
+		if ((now - start) >= wait_time)
+			break ;
+		usleep(100);
 	}
-	else if (n == 1)
-	{
-		sem_wait(info->flag_lock);
-		info->finish_flag = 1;
-		sem_post(&(info->flag_lock));
-	}
-	return (result);
 }
 
 void	philo_eating(t_info *info, t_philo *philo)
@@ -51,7 +46,7 @@ void	philo_eating(t_info *info, t_philo *philo)
 	}
 }
 
-void	check_philo_dead(void *argv)
+void	*check_philo_dead(void *argv)
 {
 	long long	cur;
 	t_info		*info;

@@ -6,7 +6,7 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 17:28:47 by dakang            #+#    #+#             */
-/*   Updated: 2024/07/12 17:37:10 by dakang           ###   ########.fr       */
+/*   Updated: 2024/07/12 19:32:42 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,26 @@ int	action_print(t_info *info, int id, char *str)
 		printf("%lld %d %s\n", cur_time - info->start_time, id + 1, str);
 	if (ft_strncmp(str, "died", 4) == 0)
 		return (0);
-	sem_post(&(info->print_lock));
+	sem_post(info->print_lock);
 	return (0);
+}
+
+int	get_set_finish_flag(t_info *info, int n)
+{
+	int	result;
+
+	result = 0;
+	if (n == 0)
+	{
+		sem_wait(info->flag_lock);
+		result = info->finish_flag;
+		sem_post(info->flag_lock);
+	}
+	else if (n == 1)
+	{
+		sem_wait(info->flag_lock);
+		info->finish_flag = 1;
+		sem_post(info->flag_lock);
+	}
+	return (result);
 }

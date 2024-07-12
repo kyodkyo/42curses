@@ -6,7 +6,7 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:07:23 by dakang            #+#    #+#             */
-/*   Updated: 2024/07/12 17:34:48 by dakang           ###   ########.fr       */
+/*   Updated: 2024/07/12 19:31:41 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	init_philo(t_info *info)
 		info->philo[i].info = info;
 		info->philo[i].id = i;
 		info->philo[i].eat_count = 0;
-		info->philo[i].last_eat_time = get_time();
+		info->philo[i].last_eat_time = get_cur_time();
 		i++;
 	}
 	return (0);
