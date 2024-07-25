@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:25:37 by dakyo             #+#    #+#             */
-/*   Updated: 2024/07/09 20:23:22 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/07/25 15:52:28 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	error(char *str)
+{
+	printf("%s\n", str);
+	return (1);
+}
 
 int	main(int argc, char **argv)
 {

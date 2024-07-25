@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 14:53:29 by dakang            #+#    #+#             */
-/*   Updated: 2024/07/10 22:31:57 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/07/25 15:53:53 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	error(char *str)
-{
-	printf("%s\n", str);
-	return (1);
-}
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -72,6 +66,17 @@ int	get_set_finish_flag(t_info *info, int n)
 		pthread_mutex_unlock(&(info->flag_lock));
 	}
 	return (result);
+}
+
+int	get_finished_eat_count(t_info *info)
+{
+	int	res;
+
+	res = 0;
+	pthread_mutex_lock(&(info->eat_lock));
+	res = info->finished_eat_philo;
+	pthread_mutex_unlock(&(info->eat_lock));
+	return (res);
 }
 
 void	pass_time(long long wait_time, t_info *info)

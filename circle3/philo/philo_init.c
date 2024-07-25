@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 14:56:17 by dakang            #+#    #+#             */
-/*   Updated: 2024/07/10 22:27:53 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/07/25 16:46:32 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	init_info_mutex(t_info *info)
 			return (1);
 		i++;
 	}
+	if (pthread_mutex_init(&(info->eat_lock), NULL))
+		return (1);
 	if (pthread_mutex_init(&(info->print_lock), NULL))
 		return (1);
 	if (pthread_mutex_init(&(info->time_lock), NULL))

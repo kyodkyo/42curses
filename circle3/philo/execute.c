@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dakyo <dakyo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 21:43:58 by dakang            #+#    #+#             */
-/*   Updated: 2024/07/10 22:32:16 by dakyo            ###   ########.fr       */
+/*   Updated: 2024/07/25 16:53:56 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ void	philo_eating(t_info *info, t_philo *philo)
 	{
 		pthread_mutex_lock(&(info->forks[philo->right]));
 		action_print(info, philo->id, "has taken a fork");
-		action_print(info, philo->id, "is eating");
 		pthread_mutex_lock(&(info->time_lock));
 		philo->last_eat_time = get_cur_time();
 		pthread_mutex_unlock(&(info->time_lock));
 		philo->eat_count = philo->eat_count + 1;
+		if (info->number_of_must_eat == 0
+			|| philo->eat_count <= info->number_of_must_eat)
+			action_print(info, philo->id, "is eating");
 		pass_time((long long)info->time_to_eat, info);
 		pthread_mutex_unlock(&(info->forks[philo->right]));
 	}
@@ -66,7 +68,11 @@ void	*thread_routine(void *argv)
 		if (info->num_of_philo == 1)
 			pass_time((long long)info->time_to_die, info);
 		if (info->number_of_must_eat == philo->eat_count)
+		{
+			pthread_mutex_lock(&(info->eat_lock));
 			info->finished_eat_philo++;
+			pthread_mutex_unlock(&(info->eat_lock));
+		}
 		action_print(info, philo->id, "is sleeping");
 		pass_time((long long)info->time_to_sleep, info);
 		action_print(info, philo->id, "is thinking");
@@ -83,7 +89,7 @@ void	check_philo_finish_or_dead(t_info *info, t_philo *philo)
 	while (!get_set_finish_flag(info, 0))
 	{
 		if ((info->number_of_must_eat != 0)
-			&& (info->num_of_philo == info->finished_eat_philo))
+			&& (info->num_of_philo == get_finished_eat_count(info)))
 			get_set_finish_flag(info, 1);
 		i = -1;
 		while (++i < info->num_of_philo)
