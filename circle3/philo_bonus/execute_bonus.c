@@ -6,7 +6,7 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:58:28 by dakang            #+#    #+#             */
-/*   Updated: 2024/07/12 19:30:21 by dakang           ###   ########.fr       */
+/*   Updated: 2024/07/15 16:22:30 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	philo_eating(t_info *info, t_philo *philo)
 		action_print(info, philo->id, "is eating");
 		sem_wait(info->time_lock);
 		philo->last_eat_time = get_cur_time();
-		sem_post(info->time_lock);
 		philo->eat_count = philo->eat_count + 1;
+		sem_post(info->time_lock);
 		pass_time((long long)info->time_to_eat, info);
 		sem_post(info->forks);
 		sem_post(info->forks);
@@ -49,6 +49,7 @@ void	philo_eating(t_info *info, t_philo *philo)
 void	*check_philo_dead(void *argv)
 {
 	long long	cur;
+	long long	last_time;
 	t_info		*info;
 	t_philo		*philo;
 
@@ -56,13 +57,17 @@ void	*check_philo_dead(void *argv)
 	info = philo->info;
 	while (!get_set_finish_flag(info, 0))
 	{
+		sem_wait(info->time_lock);
+		last_time = philo->last_eat_time;
+		sem_post(info->time_lock);
 		cur = get_cur_time();
-		if ((cur - philo->last_eat_time) >= info->time_to_die)
+		if (cur - last_time >= info->time_to_die)
 		{
 			action_print(info, philo->id, "died");
 			get_set_finish_flag(info, 1);
 			break ;
 		}
+		usleep(1000);
 	}
 	exit(1);
 	return (0);
