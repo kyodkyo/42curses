@@ -6,7 +6,7 @@
 /*   By: dakang <dakang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 21:43:58 by dakang            #+#    #+#             */
-/*   Updated: 2024/07/25 16:53:56 by dakang           ###   ########.fr       */
+/*   Updated: 2024/08/02 15:26:47 by dakang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,6 @@ int	run_philo(t_info *info, t_philo *philo)
 	i = 0;
 	while (i < info->num_of_philo)
 		pthread_join(philo[i++].thread, NULL);
+	free(info->forks);
 	return (0);
 }
