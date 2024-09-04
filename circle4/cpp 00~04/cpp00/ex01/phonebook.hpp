@@ -14,7 +14,7 @@ class PhoneBook{
         void Add();
         void Search();
         void PrintContact(int index);
-        std::string getTenStr(std::string str);
+        std::string GetTenStr(std::string str);
 };
 
 #endif

@@ -33,3 +33,41 @@ void Contact::setFirstName()
     }
 }
 
+void Contact::setLastName()
+{
+    while(true){
+        std::cout << "Last Name: ";
+        std::getline(std::cin, last_name);
+        if (std::cin.eof())
+            exit(0);
+        if (last_name.size() != 0)
+            break;
+        std::cout << "please enter information!" << std::endl;
+    }
+}
+
+void Contact::setNickName()
+{
+    while(true){
+        std::cout << "Nick Name: ";
+        std::getline(std::cin, nickname);
+        if (std::cin.eof())
+            exit(0);
+        if (nickname.size() != 0)
+            break;
+        std::cout << "please enter information!" << std::endl;
+    }
+}
+
+void Contact::setPhoneNum()
+{
+    while(true){
+        std::cout << "Phone Number: ";
+        std::getline(std::cin, phone_num);
+        if (std::cin.eof())
+            exit(0);
+        if (phone_num.size() != 0)
+            break;
+        std::cout << "please enter information!" << std::endl;
+    }
+}
