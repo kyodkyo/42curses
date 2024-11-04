@@ -1,4 +1,4 @@
-NAME = zombie
+NAME = ex00
 
 SRCS = main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
 OBJS = $(SRCS:.cpp=.o)

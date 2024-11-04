@@ -1,7 +1,6 @@
 #include "Zombie.hpp"
 
-int main(void)
-{
+int main(void){
     Zombie stackZombie = Zombie("stackZombie");
     stackZombie.announce();
 
@@ -11,5 +10,5 @@ int main(void)
     randomChump("randomChumpStackZombie");
 
     delete heapZombie;
-    return (0);
+    return 0;
 }
