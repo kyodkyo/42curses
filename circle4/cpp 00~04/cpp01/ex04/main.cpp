@@ -13,7 +13,7 @@ int main(int ac, char *av[]){
     int s2_len;
 
     if (ac != 4){
-        std::cout << "argc is not 4" << std::endl;
+        std::cout << "argc error" << std::endl;
         return (1);
     }
 
