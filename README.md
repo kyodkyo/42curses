@@ -13,8 +13,8 @@
 | Project                                        | Description                                                                                       |
 |------------------------------------------------|---------------------------------------------------------------------------------------------------|
 | **[get_next_line](circle1/get_next_line/README.md)** | 파일 디스크립터로부터 한 줄씩 읽어오는 함수를 구현하여 파일 I/O를 익힙니다.                        |
-| **[bore2beroot](circle1/bore2beroot/README.md)**     | 리눅스 권한에 대한 이해를 심화합니다.                                                             |
-| **[printf](circle1/printf/README.md)**               | 표준 `printf` 함수를 재구현하여 가변 인자 함수와 형식 지정자를 학습합니다.                         |
+| **[born2beroot](circle1/born2beroot/README.md)**     | 리눅스 권한에 대한 이해를 심화합니다.                                                             |
+| **[ft_printf](circle1/ft_printf/README.md)**               | 표준 `printf` 함수를 재구현하여 가변 인자 함수와 형식 지정자를 학습합니다.                         |
 
 ### 🥨 Circle 2
 | Project                                     | Description                                                                                       |
@@ -27,7 +27,7 @@
 | Project                                     | Description                                                                                       |
 |---------------------------------------------|---------------------------------------------------------------------------------------------------|
 | **[minishell](circle3/minishell/README.md)** | 쉘 프로그램을 제작하여 명령어 파싱, 리디렉션, 프로세스 실행 등을 연습합니다.                        |
-| **[philosophers](circle3/philosophers/README.md)** | 고전적인 식사하는 철학자 문제를 통해 스레딩, 동기화, 데드락 방지를 학습합니다.                      |
+| **[philosophers](circle3/philo/README.md)** | 고전적인 식사하는 철학자 문제를 통해 스레딩, 동기화, 데드락 방지를 학습합니다.                      |
 
 ### 🥨 Circle 4
 | Project                                     | Description                                                                                       |
