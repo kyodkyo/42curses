@@ -1,6 +1,6 @@
-NAME = 
+NAME = ex03
 
-SRCS = main.cpp
+SRCS = main.cpp Fixed.cpp Point.cpp bsp.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 CPP = c++ -Wall -Wextra -Werror -std=c++98
