@@ -15,7 +15,7 @@ Fixed::Fixed(const Fixed &fixed) {
     *this = fixed;
 }
 
-Fixed& Fixed::operator = (const Fixed& other) {
+Fixed& Fixed::operator=(const Fixed& other) {
     if (this != &other)
         this->value = other.getRawBits();
 
@@ -70,7 +70,7 @@ Fixed Fixed::operator+(const Fixed &fixed) const {
 }
 
 Fixed Fixed::operator-(const Fixed &fixed) const {
-    return Fixed(this->toFloat() + fixed.toFloat());
+    return Fixed(this->toFloat() - fixed.toFloat());
 }
 
 Fixed Fixed::operator*(const Fixed &fixed) const {
