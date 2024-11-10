@@ -22,7 +22,7 @@ int main(int ac, char *av[]){
     s1_len = s1.length();
     s2_len = s2.length();
 
-    if (std::strlen(av[1]) == 0 || s1_len == 0 || s2_len == 0){
+    if (std::string(av[1]).length() == 0 || s1_len == 0 || s2_len == 0){
         std::cout << "arguments error" << std::endl;
         return (1);
     }
@@ -35,7 +35,7 @@ int main(int ac, char *av[]){
 
     outfile = av[1];
     outfile.append(".replace");
-    ofs.open(outfile);
+    ofs.open(outfile.c_str());
     if (ofs.fail()){
         std::cout << "file error" << std::endl;
         return (1);
