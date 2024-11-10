@@ -38,6 +38,7 @@ int main(int ac, char *av[]){
         std::cerr << "no contents error" << std::endl;
         return (1);
     }
+    ifs.seekg(0, std::ios::beg);
 
     outfile = av[1];
     outfile.append(".replace");
