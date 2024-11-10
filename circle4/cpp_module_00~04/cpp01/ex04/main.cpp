@@ -13,7 +13,7 @@ int main(int ac, char *av[]){
     int s2_len;
 
     if (ac != 4){
-        std::cout << "argc error" << std::endl;
+        std::cerr << "argc error" << std::endl;
         return (1);
     }
 
@@ -23,13 +23,19 @@ int main(int ac, char *av[]){
     s2_len = s2.length();
 
     if (std::string(av[1]).length() == 0 || s1_len == 0 || s2_len == 0){
-        std::cout << "arguments error" << std::endl;
+        std::cerr << "arguments error" << std::endl;
         return (1);
     }
 
     ifs.open(av[1]);
     if (ifs.fail()){
-        std::cout << "file error" << std::endl;
+        std::cerr << "file error" << std::endl;
+        return (1);
+    }
+
+    ifs.seekg(0, std::ios::end);
+    if (ifs.tellg() == 0){
+        std::cerr << "no contents error" << std::endl;
         return (1);
     }
 
