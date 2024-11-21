@@ -11,6 +11,7 @@ class Character : public ICharacter {
         Character &operator=(const Character &copy);
         ~Character();
 
+        void printInventory() const;
         std::string const &getName() const;
         void equip(AMateria *materia);
         void unequip(int idx);
