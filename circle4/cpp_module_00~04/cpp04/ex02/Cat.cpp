@@ -6,7 +6,7 @@ Cat::Cat(){
     std::cout << "Cat Default constructor called" << std::endl;
 }
 
-Cat::Cat(const Cat &cat) : Animal(cat) {
+Cat::Cat(const Cat &cat) : AbstractAnimal(cat) {
     *this = cat;
     this->brain = new Brain();
     std::cout << "Cat Copy constructor called" << std::endl;

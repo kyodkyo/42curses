@@ -1,10 +1,10 @@
 #ifndef DOG_HPP
 # define DOG_HPP
 
-#include "Animal.hpp"
+#include "AbstractAnimal.hpp"
 #include "Brain.hpp"
 
-class Dog : public Animal {
+class Dog : public AbstractAnimal {
     public:
         Dog();
         Dog(const Dog &dog);

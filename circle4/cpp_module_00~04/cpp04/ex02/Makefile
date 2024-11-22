@@ -1,6 +1,6 @@
 NAME = ex02
 
-SRCS = main.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp WrongAnimal.cpp WrongCat.cpp
+SRCS = main.cpp Animal.cpp AbstractAnimal.cpp Cat.cpp Dog.cpp Brain.cpp WrongAnimal.cpp WrongCat.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 CPP = c++ -Wall -Wextra -Werror -std=c++98
