@@ -12,7 +12,7 @@ class MateriaSource : public IMateriaSource {
         MateriaSource &operator=(const MateriaSource &materiaSource);
         ~MateriaSource();
 
-        void printStore() const;
+        AMateria *getStore(int idx) const;
         void learnMateria(AMateria *aMateria);
         AMateria *createMateria(std::string const &type);
 

@@ -46,10 +46,8 @@ Character::~Character(){
     std::cout << "Character Destructor called" << std::endl;
 }
 
-void Character::printInventory() const {
-    for(int i=0; i<4; i++){
-        std::cout << "inventory[" << i << "] : " << this->inventory[i] << std::endl; 
-    }
+AMateria *Character::getInventory(int idx) const {
+    return this->inventory[idx];
 }
 
 std::string const &Character::getName() const {

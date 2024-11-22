@@ -12,7 +12,7 @@ class IMateriaSource {
         IMateriaSource &operator=(const IMateriaSource &iMateriaSource);
         virtual ~IMateriaSource();
 
-        virtual void printStore() const = 0;
+        virtual AMateria *getStore(int idx) const = 0;
         virtual void learnMateria(AMateria *aMateria) = 0;
         virtual AMateria *createMateria(std::string const &type) = 0;
 };

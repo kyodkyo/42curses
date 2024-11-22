@@ -35,10 +35,8 @@ MateriaSource::~MateriaSource(){
     std::cout << "MateriaSource Destructor called" << std::endl;
 }
 
-void MateriaSource::printStore() const {
-    for(int i=0; i<4; i++){
-        std::cout << "store[" << i << "] : " << this->store[i] << std::endl; 
-    }
+AMateria *MateriaSource::getStore(int idx) const {
+    return this->store[idx];
 }
 
 void MateriaSource::learnMateria(AMateria *aMateria){
