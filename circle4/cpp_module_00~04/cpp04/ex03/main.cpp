@@ -4,6 +4,8 @@
 #include "MateriaSource.hpp"
 
 int main(){
+    // 젤 마지막에 unequip만 실행하면 leak
+    // equip delete 대신 floor 구현이 필요? 어케해;;
     IMateriaSource* iMaterialSource = new MateriaSource();
     std::cout << "store state" << std::endl;
     std::cout << "store[0] : " << iMaterialSource->getStore(0) << std::endl;

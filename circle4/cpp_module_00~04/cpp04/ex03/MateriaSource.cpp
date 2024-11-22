@@ -18,7 +18,7 @@ MateriaSource &MateriaSource::operator=(const MateriaSource &materiaSource){
             delete this->store[i];
 
             if (materiaSource.store[i])
-                this->store[i] = materiaSource.store[i];
+                this->store[i] = materiaSource.store[i].clone();
             else
                 this->store[i] = NULL;
         }
@@ -43,6 +43,7 @@ void MateriaSource::learnMateria(AMateria *aMateria){
     for(int i=0; i<4; i++){
         if (!this->store[i]){
             this->store[i] = aMateria->clone();
+            delete aMateria;
             break;
         }
     }

@@ -7,8 +7,8 @@ Cat::Cat(){
 }
 
 Cat::Cat(const Cat &cat) : AbstractAnimal(cat) {
-    *this = cat;
     this->brain = new Brain();
+    *this = cat;
     std::cout << "Cat Copy constructor called" << std::endl;
 }
 

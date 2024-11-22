@@ -29,7 +29,7 @@ Character &Character::operator=(const Character &copy){
             delete this->inventory[i];
 
             if (copy.inventory[i])
-                this->inventory[i] = copy.inventory[i];
+                this->inventory[i] = copy.inventory[i].clone();
             else
                 this->inventory[i] = NULL;
         }
@@ -58,6 +58,7 @@ void Character::equip(AMateria *materia){
     for(int i=0; i<4; i++){
         if (!this->inventory[i]){
             this->inventory[i] = materia->clone();
+            delete materia;
             break;
         }
     }

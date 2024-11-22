@@ -35,10 +35,16 @@ int main(){
         std::cout << "Dog's 100th idea: " << dog->getDogIdea(100) << std::endl;
 
         Dog *copyDog = new Dog();
-        *copyDog = *dog;
         std::cout << std::endl;
         
         dog->setDogIdea(99, "This is new idea");
+        std::cout << "Dog's Last idea: " << dog->getDogIdea(99) << std::endl;
+        std::cout << "Copy dog's Last idea: " << copyDog->getDogIdea(99) << std::endl;
+        std::cout << std::endl;
+
+        *copyDog = *dog;
+        std::cout << std::endl;
+        
         std::cout << "Dog's Last idea: " << dog->getDogIdea(99) << std::endl;
         std::cout << "Copy dog's Last idea: " << copyDog->getDogIdea(99) << std::endl;
         
@@ -60,10 +66,16 @@ int main(){
         std::cout << "Cat's 100th idea: " << cat->getCatIdea(100) << std::endl;
 
         Cat *copyCat = new Cat();
-        *copyCat = *cat;
         std::cout << std::endl;
 
         cat->setCatIdea(99, "This is new idea");
+        std::cout << "Cat's Last idea: " << cat->getCatIdea(99) << std::endl;
+        std::cout << "Copy cat's Last idea: " << copyCat->getCatIdea(99) << std::endl;
+        std::cout << std::endl;
+
+        *copyCat = *cat;
+        std::cout << std::endl;
+        
         std::cout << "Cat's Last idea: " << cat->getCatIdea(99) << std::endl;
         std::cout << "Copy cat's Last idea: " << copyCat->getCatIdea(99) << std::endl;
         

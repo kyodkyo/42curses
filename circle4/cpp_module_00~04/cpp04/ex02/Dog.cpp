@@ -7,8 +7,8 @@ Dog::Dog(){
 }
 
 Dog::Dog(const Dog &dog) : AbstractAnimal(dog) {
-    *this = dog;
     this->brain = new Brain();
+    *this = dog;
     std::cout << "Dog Copy constructor called" << std::endl;
 }
 
