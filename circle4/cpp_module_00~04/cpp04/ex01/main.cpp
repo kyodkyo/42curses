@@ -26,7 +26,7 @@ int main(){
         delete dog;
         delete copyDog;
     }
-
+    std::cout << "-----------------------------------------";
     {
         std::cout << std::endl;
         std::cout << "###### Cat Test ###### " << std::endl;
@@ -45,7 +45,7 @@ int main(){
 
         cat->setCatIdea(99, "This is new idea");
         std::cout << "Cat's Last idea: " << cat->getCatIdea(99) << std::endl;
-        std::cout << "Copy cat's Last idea: " << cat->getCatIdea(99) << std::endl;
+        std::cout << "Copy cat's Last idea: " << copyCat->getCatIdea(99) << std::endl;
         
         std::cout << std::endl;
         delete cat;
